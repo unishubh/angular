@@ -1,0 +1,47 @@
+<section class="imgd">
+<div>
+		<div class="ui centered grid container" style="position:relative; margin-top:175px;">
+		  <div class="nine wide column">
+
+			<div class="ui fluid card">
+			  <div class="content">
+					<h4 class="ui dividing header"> <i class="unlock alternate icon"></i> Login</h4>
+			  <form class="ui form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
+				<div class="field">
+				  <label for="inputEmail3" >Email</label>
+				  <input type="email" id="inputEmail3" #emailref="ngModel"  required name="email" [(ngModel)]="email">
+				  <div *ngIf="emailerror" class="alert alert-danger" style="margin-top: 3px;">
+				  	Enter a valid E-Mail.
+				  </div>
+
+				</div>
+				<div class="field">
+						<label for="inputPassword3" >Password</label>
+				  <input type="password" #passref="ngModel" required  name="password" ngModel>
+				  <div *ngIf="passworderror" class="alert alert-danger" style="margin-top: 3px;">
+				  	Password must be greater than 5 characters.
+				  </div>
+
+				</div>
+				<button [disabled]="!loginForm.valid" class="ui primary labeled icon button" *ngIf="!dis">
+				  <i class="unlock alternate icon"></i>
+				  Login
+				</button>
+				 <button  *ngIf="dis" class="ui primary disabled loading button">Loading</button>
+			  </form>
+			  &nbsp;
+			  <div class="field">
+					Not Registered? <a [routerLink]="['/register']">Register here</a>
+					<div class="pull-right">Forgot Password? <a [routerLink]="['/forgot']">Reset</a></div>
+
+			  </div>
+
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</section>
+
+
+
