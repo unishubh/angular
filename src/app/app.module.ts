@@ -2,8 +2,8 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { StarterComponent } from './starter/starter.component';
 import { StarterHeaderComponent } from './starter/starter-header/starter-header.component';
@@ -11,6 +11,7 @@ import { StarterLeftSideComponent } from './starter/starter-left-side/starter-le
 import { StarterContentComponent } from './starter/starter-content/starter-content.component';
 import { StarterFooterComponent } from './starter/starter-footer/starter-footer.component';
 import { StarterControlSidebarComponent } from './starter/starter-control-sidebar/starter-control-sidebar.component';
+import { CheckGuard} from './_guards/check.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { AdminLeftSideComponent } from './admin/admin-left-side/admin-left-side.component';
@@ -19,6 +20,14 @@ import { AdminFooterComponent } from './admin/admin-footer/admin-footer.componen
 import { AdminControlSidebarComponent } from './admin/admin-control-sidebar/admin-control-sidebar.component';
 import { AdminDashboard1Component } from './admin/admin-dashboard1/admin-dashboard1.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
+import { InitvendorComponent } from './initvendor/initvendor.component';
+import { AddUserComponent } from './add-user/add-user.component';
+
+import {LoginService} from './services/login.service';
+import { VendorFormComponent } from './views/vendor-form/vendor-form.component';
+import { VendorListComponent } from './vendor-list/vendor-list.component';
+import { VendorDetailsComponent } from './views/vendor-details/vendor-details.component';
+
 
 @NgModule({
   declarations: [
@@ -29,15 +38,26 @@ import { LoginComponentComponent } from './login-component/login-component.compo
     StarterContentComponent,
     StarterFooterComponent,
     StarterControlSidebarComponent,
-    LoginComponentComponent
+    LoginComponentComponent,
+    InitvendorComponent,
+    AddUserComponent,
+    VendorFormComponent,
+    VendorListComponent,
+    VendorDetailsComponent,
+  
   ],
   imports: [
+    HttpModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    AdminModule
+    AdminModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ 
+    CheckGuard,
+    LoginService,
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

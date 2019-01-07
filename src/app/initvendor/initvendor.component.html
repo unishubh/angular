@@ -1,0 +1,168 @@
+<section class="content-header">
+  <h1>
+    Add a new Vendor
+  </h1>
+  
+</section>
+<!-- Main content -->
+<section class="content">
+
+
+  <div class="container">
+  <form class="form-horizontal" [formGroup] = "vendorForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+  
+  <!-- Form Name -->
+  <!-- <div class="form-group">
+  <label class="col-md-4 control-label" for="textinput"><h3>Education System</h3></label> 
+  </div> -->
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput"> Business Entity</label>  
+    <div class="col-md-4">
+    <!-- <input id="textinput" name="company" type="text" placeholder="" class="form-control input-md" ngModel> -->
+    <select class="browser-default custom-select" name="company" formControlName="company" >
+      <option selected>Open this select menu</option>
+      <option value="FEL">FEL</option>
+      <option value="CT">CT</option>
+      <option value="FLFL Brands">FLFL Brands</option>
+      <option value="LC">LC</option>
+      <option value="ALL">ALL</option>
+      <option value="GIOVANI">GIOVANI</option>
+    </select>
+    </div>
+  </div> 
+  <hr><hr size="30">
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">LOB</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name = "lob" formControlName="lob" >
+      
+    </div>
+  </div> 
+  
+  
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Category</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text" name="category" class="form-control input-md" formControlName="category" >
+      
+    </div>
+  </div> 
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Product Type</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="product_type" class="form-control input-md" formControlName="product_type" >
+        
+      </div>
+    </div> 
+  
+    <div formArrayName = "products">
+      <div *ngFor= "let product of vendorForm.controls.products.controls; let vendorIndex=index;"  >
+         <div class="form-group" [formGroupName] = "vendorIndex"  >
+             <label class="col-md-4 control-label" for="textinput">Product</label>  
+             <div class="col-md-4">
+             <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product" >
+               
+             </div>
+           </div> 
+      </div>
+    
+    </div> 
+
+    <div class="form-group">
+     <label class="col-md-4 control-label" for="singlebutton"></label>
+     <div class="col-md-4 col-md-offset-7">
+       <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addProduct()">Add more Products</button>
+     </div>
+   </div> 
+     
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Type</label>  
+        <div class="col-md-4">
+          <select class="browser-default custom-select" name="type" formControlName="type"  >
+            <option selected>Open this select menu</option>
+            <option value="domestic">Domestic</option>
+            <option value="import">import</option>
+          </select>
+          
+        </div>
+      </div> 
+  <hr><hr size="30">
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Country</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md" formControlName="country" >
+        
+      </div>
+    </div> 
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Buying Mode</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="textinput" type="text" value="Outright" name="buying_mode" class="form-control input-md" formControlName="buying_mode" >
+          
+        </div>
+      </div> 
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Payment Term</label>  
+        <div class="col-md-4">
+          <select class="browser-default custom-select" name="payment_term" formControlName="payment_term"  >
+            <option selected>Open this select menu</option>
+            <option value="10">10 days</option>
+            <option value="15">15 days</option>
+            <option value="21">21 days</option>
+            <option value="30">30 days</option>
+            <option value="45">45 days</option>
+            <option value="60">60 days</option>
+            <option value="90">90 days</option>
+            <option value="120">120 days</option>
+            <option value="against lc">Against LC</option>
+            <option value="immediate">Immediate</option>
+          </select>
+          
+        </div>
+      </div> 
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Incoterms</label>  
+        <div class="col-md-4">
+          <select class="browser-default custom-select" name="incoterm" formControlName="incoterm"  >
+            <option selected>Open this select menu</option>
+            <option value="DDP">DDP</option>
+            <option value="DDU">DDU</option>
+            <option value="FOB">FOB</option>
+            <option value="EXW">EXW</option>
+          </select>
+          
+        </div>
+      </div> 
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Form Allocated</label>  
+        <div class="col-md-4">
+        <!-- <input id="textinput" name="company" type="text" placeholder="" class="form-control input-md" ngModel> -->
+        <select class="browser-default custom-select" name="form_allocated" formControlName="form_allocated" >
+          <option selected>Open this select menu</option>
+          <option value="1">1</option>
+          <option value="2">1</option>
+        </select>
+        </div>
+      </div> 
+
+    
+  <hr>
+
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4 col-md-offset-1">
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+      </div>
+    </div> 
+  </fieldset>
+  </form>
+  
+  </div>
+  
+  </section>

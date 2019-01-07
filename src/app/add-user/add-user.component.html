@@ -1,0 +1,107 @@
+<section class="content-header">
+  <h1>
+    Add a new User
+  </h1>
+  
+</section>
+<!-- Main content -->
+<section class="content">
+
+
+  <div class="container">
+  <form class="form-horizontal" [formGroup] = "userForm" (ngSubmit)="onSubmit()">
+  <fieldset>
+  
+  <!-- Form Name -->
+  <!-- <div class="form-group">
+  <label class="col-md-4 control-label" for="textinput"><h3>Education System</h3></label> 
+  </div> -->
+  
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Username</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text"  class="form-control input-md" name = "username" formControlName="username" >
+      
+    </div>
+  </div> 
+  
+  
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Password</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text" name="password" class="form-control input-md" formControlName="password" >
+      
+    </div>
+  </div> 
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Phone</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md" formControlName="phone" >
+        
+      </div>
+    </div> 
+ 
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Company</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="company" class="form-control input-md" formControlName="company" >
+        
+      </div>
+    </div> 
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Department</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="textinput" type="text"  name="department" class="form-control input-md" formControlName="department" >
+          
+        </div>
+      </div> 
+    
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Email</label>  
+        <div class="col-md-4">
+        <input id="textinput" name="textinput" type="text"  name="email" class="form-control input-md" formControlName="email" >
+          
+        </div>
+      </div> 
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Level</label>  
+        <div class="col-md-4">
+          <select class="browser-default custom-select" name="level" formControlName="level"  >
+            <option selected>Open this select menu</option>
+            <option value="0">NA</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Role</label>  
+        <div class="col-md-4">
+          <select class="browser-default custom-select" name="role" formControlName="role"  >
+            <option selected>Open this select menu</option>
+            <option value="Non-Admin">Non-Admin</option>
+            <option value="Admin">Admin</option>
+          </select>
+          
+        </div>
+      </div>
+    
+  <hr>
+
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4 col-md-offset-1">
+        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+      </div>
+    </div> 
+  </fieldset>
+  </form>
+  
+  </div>
+  
+  </section>

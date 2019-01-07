@@ -1,0 +1,118 @@
+<hr>
+<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Basic Details</h2></div>
+<hr>
+<table  class="table table-striped" >
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Office Address</th>
+      <th>City</th>
+      <th>Pin Code</th>
+      <th>Phone</th>
+      <th>State</th>
+      <th>Establishment Year</th>
+      <th>Website</th>
+      <th>Contact Person</th>
+      <th>Email</th>
+      <th>Designation</th>
+      <th> Bank</th>
+      <th> Account Number</th>
+      <th> Branch</th>
+      <th> IFSC</th>
+
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of vendors;let c=index">
+      <th scope="row">{{c+1}}</th>
+      <td>{{i.vendor_name}}</td>
+      <td>{{i.office_address}}</td>
+      <td>{{i.city}}</td>
+      <td>{{i.pin_code}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.state}}</td>
+      <td>{{i.establishment_year}}</td>
+      <td>{{i.website}}</td>
+      <td>{{i.contact_name}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.designation}}</td>
+      <td>{{i.contact_phone}}</td>
+      <td>{{i.bank_name}}</td>
+      <td>{{i.bank_account_number}}</td>
+      <td>{{i.bank_branch}}</td>
+      <td>{{i.ifsc}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr><hr size="30">
+<div class="ui horizontal divider"></div>
+<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Sales</h2></div>
+<hr>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Products</th>
+      <th>Turnover</th>
+      <th>Business Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of sales;let c=index">
+      <th scope="row">{{c+1}}</th>
+      <td>{{i.products}}</td>
+      <td>{{i.turnover}}</td>
+      <td>{{i.business_percentage}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr><hr size=30>
+<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Manufacturers</h2></div>
+<hr>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Location</th>
+      <th>Product Type</th>
+      <th>Number of Machines</th>
+      <th>Monthly Production Capacity</th>
+      <th>Technical Workers</th>
+      <th>Certifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of manufacturers;let c=index">
+      <th scope="row">{{c+1}}</th>
+      <td>{{i.location}}</td>
+      <td>{{i.product_type}}</td>
+      <td>{{i.num_of_machines}}</td>
+      <td>{{i.monthly_production_capacity}}</td>
+      <td>{{i.technical_workers}}</td>
+      <td>{{i.certifications}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr><hr size=30>
+<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Promoters</h2></div>
+<hr>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Promoter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of promoters;let c=index">
+      <th scope="row">{{c+1}}</th>
+      <td>{{i.promoter}}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+
+<button style="position:relative; left: 48%;" id="singlebutton" type = "button" class="btn center btn-primary" >Verify Vendor</button>

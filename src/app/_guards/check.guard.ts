@@ -8,10 +8,10 @@ export class CheckGuard implements CanActivate {
  
     canActivate() {
        console.log("can activate");
-        // if (true) {
-        //     //this.router.navigate(['/starter']);
-        //     return false;
-        // }
+        if (localStorage.getItem('token')) {
+            this.router.navigate(['/starter/vendorList']);
+            return false;
+        }
         return true;
     }
  }
