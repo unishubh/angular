@@ -1,0 +1,451 @@
+<style>
+    input {
+      background-color: gainsboro;
+      border-radius: 10px 10px 10px 10px;
+    }
+    select {
+      background-color: gainsboro;
+    }
+    </style>
+  
+
+<section class="content-header">
+  
+
+</section>
+<!-- Main content -->
+<section class="content">
+
+
+  <div class="ui raised very padded text container segment">
+      <h3>
+          Add a new Vendor
+        </h3>
+        <br>
+        <br>
+    <form class="form-horizontal" [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+
+
+        <!-- Text input-->
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name="expenses"
+              formControlName="expenses" placeholder="Expenses">
+
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="nature_of_expense" class="form-control input-md"
+              formControlName="nature_of_expense" placeholder="Nature of Expense">
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="name" class="form-control input-md"
+              formControlName="name" placeholder="Company Name">
+
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="vendor_email" class="form-control input-md"
+              formControlName="vendor_email" placeholder="Email">
+            <div *ngIf="!vendorForm.controls['vendor_email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+              *Email Not valid
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="code" class="form-control input-md"
+              formControlName="code" placeholder="Company Code">
+
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="planning_group" class="form-control input-md"
+              formControlName="planning_group" placeholder="Planning Group">
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <br>
+            
+            <input id="textinput" name="textinput" type="text" name="payment_method" class="form-control input-md"
+              formControlName="payment_method" placeholder="Payment Method">
+          </div>
+          <div class="col-md-6">
+            <label style="text-align: right;" class="control-label" for="textinput">Payment Term</label>
+            
+              <select class="form-control input-mdt" name="payment_term" formControlName="payment_term">
+                  <option selected>Open this select menu</option>
+                <option value="10">10 days</option>
+                <option value="15">15 days</option>
+                <option value="21">21 days</option>
+                <option value="30">30 days</option>
+                <option value="45">45 days</option>
+                <option value="60">60 days</option>
+                <option value="90">90 days</option>
+                <option value="120">120 days</option>
+                <option value="against lc">Against LC</option>
+                <option value="immediate">Immediate</option>
+              </select>
+            
+          </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="contact_name" class="form-control input-md"
+              formControlName="contact_name" placeholder="Name of Person responsible">
+
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="emp_code" class="form-control input-md"
+              formControlName="emp_code" placeholder="Person's employe code">
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            
+              
+          
+            <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md"
+              formControlName="contact_phone" placeholder="Person's Mobile Number">
+            
+          
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md"
+              formControlName="country" placeholder="Country">
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="cfo_name" class="form-control input-md"
+              formControlName="cfo_name" placeholder="Name of CFO">
+
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" name="cfo_code" class="form-control input-md"
+              formControlName="cfo_code" placeholder="CFO's EMP code">
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label style="text-align: right;" class=" control-label" for="textinput">Business Entity</label>
+           
+              <select class="form-control input-md" name="company" formControlName="business_entity">
+                <option selected>Open this select menu</option>
+                <option value="FEL">FEL</option>
+                <option value="CT">CT</option>
+                <option value="FLFL Brands">FLFL Brands</option>
+                <option value="LC">LC</option>
+                <option value="ALL">ALL</option>
+                <option value="GIOVANI">GIOVANI</option>
+             
+                </select>
+            </div>
+          
+          <div class="col-md-6">
+            <label style="text-align: right;" class="control-label" for="textinput">Type</label>
+           
+              <select class="form-control input-md" name="type" formControlName="type">
+                <option selected>Open this select menu</option>
+                <option value="domestic">Domestic</option>
+                <option value="import">import</option>
+              </select>
+           
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label style="text-align: right;" class="control-label" for="textinput">Vendor Category</label>
+            
+              <select class="form-control input-md" name="vendor_category" formControlName="vendor_category">
+                <option value="Group">Group</option>
+                <option value="Non-Group">Non-Group</option>
+              </select>
+
+            
+          </div>
+          <!-- <div class="col-md-6">
+                        <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Type</label>
+                        <div class="col-md-10" >
+                            <select class="form-control input-md" name="type" formControlName="type"  >
+                                <option selected>Open this select menu</option>
+                                <option value="domestic">Domestic</option>
+                                <option value="import">import</option>
+                              </select>
+                          </div>
+                    </div> -->
+        </div>
+
+
+        <br><br>
+
+
+
+        <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput"> Business Entity</label>  
+    <div class="col-md-4">
+  
+    <select class="form-control input-md" name="company" formControlName="company">
+        <option selected>Open this select menu</option>
+        <option value="FEL">FEL</option>
+        <option value="CT">CT</option>
+        <option value="FLFL Brands">FLFL Brands</option>
+        <option value="LC">LC</option>
+        <option value="ALL">ALL</option>
+        <option value="GIOVANI">GIOVANI</option>
+      </select>
+    </div>
+  </div>  -->
+        <!-- <hr><hr size="30"> -->
+        <!-- Text input-->
+        <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Expenses</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name = "expenses" formControlName="expenses" >
+      
+    </div>
+  </div>  -->
+
+
+        <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Company Name</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text" name="name" class="form-control input-md" formControlName="name" >
+      
+    </div>
+  </div>  -->
+
+        <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Company Email</label>  
+    <div class="col-md-4">
+    <input id="textinput" name="textinput" type="text" name="vendor_email" class="form-control input-md" formControlName="vendor_email" >
+    <div *ngIf="!vendorForm.controls['vendor_email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+        *Email Not valid
+      </div> 
+    </div>
+  </div> -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Company Code</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="code" class="form-control input-md" formControlName="code" >
+        
+      </div>
+    </div>  -->
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Planning Group</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="planning_group" class="form-control input-md" formControlName="planning_group" >
+        
+      </div>
+    </div>  -->
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Payment Method</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="payment_method" class="form-control input-md" formControlName="payment_method" >
+        
+      </div>
+    </div>  -->
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Payment Term</label>  
+      <div class="col-md-4">
+        <select class="browser-default custom-select" name="payment_term" formControlName="payment_term"  >
+          <option selected>Open this select menu</option>
+          <option value="10">10 days</option>
+          <option value="15">15 days</option>
+          <option value="21">21 days</option>
+          <option value="30">30 days</option>
+          <option value="45">45 days</option>
+          <option value="60">60 days</option>
+          <option value="90">90 days</option>
+          <option value="120">120 days</option>
+          <option value="against lc">Against LC</option>
+          <option value="immediate">Immediate</option>
+        </select>
+        
+      </div>
+    </div> -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Nature of Expense</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="nature_of_expense" class="form-control input-md" formControlName="nature_of_expense" >
+        
+      </div>
+    </div>  -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Name of Person Responsible</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="contact_name" class="form-control input-md" formControlName="contact_name" >
+        
+      </div>
+    </div>  -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Person's Emp. Code</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="emp_code" class="form-control input-md" formControlName="emp_code" >
+        
+      </div>
+    </div>  -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Mobile No of Commercial Person Responsible</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md" formControlName="contact_phone" >
+        
+      </div>
+    </div>  -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Vendor Category</label>  
+      <div class="col-md-4">
+        <select class="form-control input-md" name="vendor_category" formControlName="vendor_category"  >
+          <option value="Group">Group</option>
+          <option value="Non-Group">Non-Group</option>
+        </select>
+        
+      </div>
+    </div> -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Name of CFO</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="cfo_name" class="form-control input-md" formControlName="cfo_name" >
+        
+      </div>
+    </div> -->
+
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">CFO Emp. code</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="cfo_code" class="form-control input-md" formControlName="cfo_code" >
+        
+      </div>
+    </div>  -->
+
+
+        <!-- <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Type</label>  
+        <div class="col-md-4">
+          <select class="browser-default custom-select" name="type" formControlName="type"  >
+            <option selected>Open this select menu</option>
+            <option value="domestic">Domestic</option>
+            <option value="import">import</option>
+          </select>
+          
+        </div>
+      </div> 
+  <hr><hr size="30"> -->
+        <!-- <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Country</label>  
+      <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md" formControlName="country" >
+        
+      </div>
+    </div>  -->
+
+        <!-- <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Form Allocated</label>  
+        <div class="col-md-4">
+        <select class="browser-default custom-select" name="form_allocated" formControlName="form_allocated" >
+          <option selected>Open this select menu</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+        </div>
+      </div>  -->
+
+
+        <hr>
+
+        <div [ngStyle]="{'display':display3}">
+
+
+          <div class="modal-dialog" role="document">
+
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Do you want to omit any level?</h4>
+              </div>
+              <form class="ui form" #declineForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <div class="row">
+                    <div *ngFor='let level of omitLevels' class="col-md-3" style="margin-left: 5%">
+                      <label class="checkbox-inline"> <input name="omitLevel" type="checkbox" [value]="level.level"
+                          [(ngModel)]="level.checked" />
+                        {{level.level}}</label>
+                    </div>
+                  </div>
+
+
+                </div>
+              </form>
+
+              <div class="modal-footer">
+
+
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="singlebutton"></label>
+          <div class="col-md-4 col-md-offset-1">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+
+</section>

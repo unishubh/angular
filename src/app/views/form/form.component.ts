@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
-import { NgForm, FormBuilder, FormGroup, FormArray, FormControl, Validators  } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { company_type, industry_type, vendor_type } from './../../form_data/vendor_link';
 
 @Component({
   selector: 'app-vendor-form',
-  templateUrl: './vendor-form.component.html',
-  styleUrls: ['./vendor-form.component.css']
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class VendorFormComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: Http, private fb: FormBuilder, private router : Router) { }
+
+export class FormComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute, private http: Http, private fb: FormBuilder, private router: Router) { }
   private _url = 'http://localhost:3000/api/vendorDetails';
   private _url_form = 'http://localhost:3000/api/form';
   private submit_url = 'http://localhost:3000/api/submitVendor';
@@ -26,15 +28,23 @@ export class VendorFormComponent implements OnInit {
   public name: String;
   public editable: Number;
   public fields: any[];
-  public isData :boolean = false;
-  public sales :any[];
-  public isEdit : boolean = false;
-  public manufacturers : any[];
-  public promoters : any[];
-  public isForm :boolean=false;
+  public isData: boolean = false;
+  public sales: any[];
+  public isEdit: boolean = false;
+  public manufacturers: any[];
+  public promoters: any[];
+  public isForm: boolean = false;
   public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   public onlyNums = "^[0-9]*$";
-  public onlyAlpha = "^[A-Za-z]+$";
+  public onlyAlpha = "^[A-Za-z ]+$";
+  public contact: number = 0;
+  public bank: number = 0;
+  public company: number = 0;
+  public others: number = 0;
+  public st: string = "";
+  public formType: Number = 0;
+  public activeTab: Number = 1;
+  public notAllowed: Boolean = false;
 
   vendorForm: FormGroup;
   vendorForm2: FormGroup;
@@ -53,13 +63,17 @@ export class VendorFormComponent implements OnInit {
           .subscribe(
             (respo: Response) => {
               let rsp = respo.json();
+              console.log("form status");
+              console.log(rsp);
+              this.formType = rsp.form;
               if (rsp.form == 1) {
                 this.isForm1 = true;
-                
+
               }
               else if (rsp.form == 2) {
                 this.isForm2 = true;
               }
+
             }
           );
 
@@ -79,7 +93,7 @@ export class VendorFormComponent implements OnInit {
                 this.fields = resp.fields;
                 console.log(resp.fields);
                 //
-                
+
                 this.http.get(this._url + '/' + params["id"], { headers: headers })
                   .subscribe(
                     (response: Response) => {
@@ -87,17 +101,19 @@ export class VendorFormComponent implements OnInit {
                       console.log(resp);
 
 
-                      this.details = resp.details[0];
+                      this.details = resp.data;
                       this.name = this.details.vendor_name;
+                      this.activeTab = this.details.filledTill;
                       console.log(this.details, this.name);
                       this.isData = true;
-                      if(this.editable) {
-                        this.sales = resp.sales;
-                        this.manufacturers = resp.manufacturers;
-                        this.promoters = resp.promoters;
+                      if (this.editable) {
+                        this.sales = resp.salesData;
+                        this.manufacturers = resp.manufacturersData;
+                        this.promoters = resp.promotersData;
                         this.setPromoters();
                         this.setManufactureres();
                         this.setSales();
+                        //  this.router.navigate( ['/starter/form/'], {fragment : "3b"});
                       }
 
                     });
@@ -112,30 +128,29 @@ export class VendorFormComponent implements OnInit {
 
     this.vendorForm = this.fb.group({
       identifier: [this.identifier],
-      name: ['', Validators.pattern(this.onlyAlpha)],
-      address: [],
-      city: ['', Validators.pattern(this.onlyAlpha)],
-      pin_code: ['', Validators.compose([Validators.minLength(5),Validators.pattern(this.onlyNums)])],
-      phone: ['', Validators.compose([Validators.minLength(10),Validators.pattern(this.onlyNums)])],
-      state: [],
-      establishment_year: ['', Validators.compose([Validators.minLength(4),Validators.pattern(this.onlyNums)])],
-      website: [],
-      contact_name: ['', Validators.pattern(this.onlyAlpha)],
-      email: ['', Validators.pattern(this.emailPattern)],
-      designation: [],
-      contact_phone: ['', Validators.compose([Validators.minLength(10),Validators.pattern(this.onlyNums)])],
-      bank_name: [],
-      bank_account_number: [],
-      bank_branch: [],
-      ifsc: [],
-      company_type: [],
-      vendor_type: [],
-      industry_type: [],
-      gst: [],
-      pan: [],
-      ssi: [],
-      effective_date: [],
-      esic: [],
+      name: ['', Validators.compose([Validators.pattern(this.onlyAlpha), Validators.required])],
+      address: ['', Validators.required],
+      city: ['', Validators.compose([Validators.pattern(this.onlyAlpha), Validators.required])],
+      pin_code: ['', Validators.compose([Validators.minLength(5), Validators.pattern(this.onlyNums), Validators.required])],
+      phone: ['', Validators.compose([Validators.minLength(10), Validators.pattern(this.onlyNums), Validators.required])],
+      state: ['', Validators.required],
+      establishment_year: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.pattern(this.onlyNums)])],
+      website: ['', Validators.required],
+      contact_name: ['', Validators.compose([Validators.pattern(this.onlyAlpha), Validators.required])],
+      email: ['', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
+      designation: ['', Validators.required],
+      contact_phone: ['', Validators.compose([Validators.minLength(10), Validators.pattern(this.onlyNums), Validators.required])],
+      bank_name: ['', Validators.required],
+      bank_account_number: ['', Validators.required],
+      bank_branch: ['Aishbagh', Validators.required],
+      ifsc: ['', Validators.required],
+      company_type: ['', Validators.required],
+      vendor_type: ['', Validators.required],
+      industry_type: ['', Validators.required],
+      gst: ['', Validators.required],
+      pan: ['', Validators.required],
+      ssi: ['', Validators.required],
+      effective_date: ['', Validators.required],
       promoters: this.fb.array([
         this.initPromoters()
       ]),
@@ -148,38 +163,38 @@ export class VendorFormComponent implements OnInit {
 
     });
 
-   // this.sales = this.vendorForm.controls.sales.controls;
+    // this.sales = this.vendorForm.controls.sales.controls;
 
     this.vendorForm2 = this.fb.group({
       identifier: [this.identifier],
-      name: ['', Validators.pattern(this.onlyAlpha)],
-      address: [],
-      city: [],
-      pin_code: ['', Validators.compose([Validators.minLength(5),Validators.pattern(this.onlyNums)])],
-      phone: ['', Validators.compose([Validators.minLength(10),Validators.pattern(this.onlyNums)])],
-      state: [],
-      establishment_year: ['', Validators.compose([Validators.minLength(4),Validators.pattern(this.onlyNums)])],
-      website: [],
-      contact_name: ['', Validators.pattern(this.onlyAlpha)],
-      email: ['', Validators.pattern(this.emailPattern)],
-      designation: [],
-      contact_phone: ['', Validators.compose([Validators.minLength(10),Validators.pattern(this.onlyNums)])],
-      bank_name: [],
-      bank_account_number: [],
-      bank_branch: [],
-      ifsc: [],
-      tds: [],
-      company_type: [],
-      vendor_type: [],
-      industry_type: [],
-      gst: [],
-      pan: [],
-      aadhar: ['', Validators.compose([Validators.minLength(12),Validators.pattern(this.onlyNums)])],
-      esic: [],
-      pf: [],
-      exice: [],
-      ssi: [],
-      effective_date: [],
+      name: ['', Validators.compose([Validators.pattern(this.onlyAlpha), Validators.required])],
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      pin_code: ['', Validators.compose([Validators.minLength(5), Validators.pattern(this.onlyNums), Validators.required])],
+      phone: ['', Validators.compose([Validators.minLength(10), Validators.pattern(this.onlyNums), Validators.required])],
+      state: ['', Validators.required],
+      establishment_year: ['', Validators.compose([Validators.minLength(4), Validators.pattern(this.onlyNums), Validators.required])],
+      website: ['', Validators.required],
+      contact_name: ['', Validators.compose([Validators.required, Validators.pattern(this.onlyAlpha)])],
+      email: ['', Validators.compose([Validators.pattern(this.emailPattern), Validators.required])],
+      designation: ['', Validators.required],
+      contact_phone: ['', Validators.compose([Validators.minLength(10), Validators.pattern(this.onlyNums), Validators.required])],
+      bank_name: ['', Validators.required],
+      bank_account_number: ['', Validators.required],
+      bank_branch: ['Aishbagh', Validators.required],
+      ifsc: ['', Validators.required],
+      tds: ['', Validators.required],
+      company_type: ['', Validators.required],
+      vendor_type: ['', Validators.required],
+      industry_type: ['', Validators.required],
+      gst: ['', Validators.required],
+      pan: ['', Validators.required],
+      aadhar: ['', Validators.compose([Validators.required, Validators.minLength(12), Validators.pattern(this.onlyNums)])],
+      esic: ['', Validators.required],
+      pf: ['', Validators.required],
+      exice: ['', Validators.required],
+      ssi: ['', Validators.required],
+      effective_date: ['', Validators.required],
       promoters: this.fb.array([
         this.initPromoters()
       ]),
@@ -193,19 +208,19 @@ export class VendorFormComponent implements OnInit {
 
     });
 
-    
+
   }
-  
+
   initPromoters() {
     return this.fb.group({
       identifier: [this.identifier],
       promoter: []
     })
   }
-  
+
 
   initSales() {
-    
+
     return this.fb.group({
       identifier: [this.identifier],
       product_supplied: [],
@@ -226,6 +241,16 @@ export class VendorFormComponent implements OnInit {
     })
   }
 
+  public findInvalidControls(form: any) {
+    const invalid = [];
+    const controls = form.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
+    }
+    return invalid;
+  }
   addSales() {
     console.log("adding sale");
     let control;
@@ -263,6 +288,8 @@ export class VendorFormComponent implements OnInit {
   }
 
   onSubmit() {
+
+    let status = this.completionStatus();
     console.log(this.vendorForm.value);
     console.log(this.promoters);
     var headers = new Headers();
@@ -273,8 +300,22 @@ export class VendorFormComponent implements OnInit {
     else {
       form = this.vendorForm2;
     }
+    console.log(this.findInvalidControls(form));
+    Object.keys(form.controls).forEach(field => { // {1}
+      const control = form.get(field);            // {2}
+      control.markAsDirty({ onlySelf: true });       // {3}
+    });
+    if (form.valid) {
+      console.log("Valid");
+    }
+    else {
+      console.log("Invalid");
+      alert("Please recheck the form");
+      return;
+    }
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let content = new URLSearchParams();
+    content.set('formType', String(this.formType));
     content.set('edit', String(this.editable));
     content.set('identifier', form.value.identifier);
     content.set('name', form.value.name);
@@ -301,16 +342,31 @@ export class VendorFormComponent implements OnInit {
     content.set('gst', form.value.gst);
     content.set('ssi', form.value.ssi);
     content.set('pan', form.value.pan);
+    content.set('tds', form.value.tds);
+    content.set('exice', form.value.exice);
     content.set('effective_date', form.value.effective_date);
     content.set('promoters', JSON.stringify(form.value.promoters));
     content.set('sales', JSON.stringify(form.value.sales));
     content.set('manufacturers', JSON.stringify(form.value.manufacturers));
+    //content.set('status', String(status));
 
     this.http.post(this.submit_url, content.toString(), { headers: headers })
       .subscribe(
         (response: Response) => {
           console.log(response.json());
           alert('Thank you for filling the form');
+          this.isData = false;
+        },
+        (error) => {
+          let resp = error.json();
+          console.log(error);
+          alert(resp.message);
+          // if(resp.message == "Vendor with same name already exists") {
+          //   alert(resp.message);
+          // }
+          // else {
+          //   alert("Something went wrong");
+          // }
         }
       );
   }
@@ -321,18 +377,18 @@ export class VendorFormComponent implements OnInit {
 
   isTrue(attr: any) {
     // console.log("is true")
-    if(!this.isEdit) {
+    if (!this.isEdit) {
       return false;
     }
     let st = JSON.stringify(this.fields);
-    // console.log("Stringified",st);
-    // console.log(st.indexOf(attr));
-    // console.log(attr);
+    console.log("Stringified", st);
+    console.log(st.indexOf(attr));
+    console.log(attr);
     if (st.indexOf(attr) > -1) {
       return true;
     }
-    else 
-    return false;
+    else
+      return false;
   }
 
   setPromoters() {
@@ -368,7 +424,7 @@ export class VendorFormComponent implements OnInit {
         certification: x.certifications,
         number_of_machines: x.num_of_machines,
         product_type_man: x.product_type,
-        technical_workers: x.technical_workers ,
+        technical_workers: x.technical_workers,
         location: x.location
       }))
     });
@@ -392,4 +448,53 @@ export class VendorFormComponent implements OnInit {
       }))
     });
   }
+
+  counter(type: Number, field: string) {
+    if (this.st.indexOf(field) == -1) {
+      if (type == 1) {
+        this.company++;
+      }
+      else if (type == 2) {
+        this.contact++;
+      }
+      else if (type == 3) {
+        this.bank++;
+      }
+      else if (type == 4) {
+        this.others++;
+      }
+
+      this.st = this.st + field;
+    }
+
+
+  }
+
+  completionStatus() {
+    if (this.company > 0 && this.company < 8) {
+      return 1;
+    }
+    else if (this.contact > 0 && this.contact < 4) {
+      return 2;
+    }
+    else if (this.bank > 0 && this.contact < 10) {
+      return 3;
+    }
+    else if (this.contact > 0 && this.contact < 3) {
+      return 4;
+    }
+    else {
+      return 5;
+    }
+  }
+
+  getClass(tab) {
+    console.log(tab);
+    if (tab == this.activeTab)
+      return "active"
+  }
+
+
+
 }
+

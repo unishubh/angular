@@ -1,0 +1,60 @@
+<section class="imgd" *ngIf = "showForm">
+  <div>
+      <div class="ui centered grid container" style="position:relative; margin-top:17px;">
+        <div class="nine wide column">
+  
+        <div class="ui fluid card">
+          <div class="content">
+            <h4 class="ui dividing header"> <i class="unlock alternate icon"></i> Vendor History</h4>
+          <form class="ui form" #historyForm="ngForm" (ngSubmit)="onSubmit(historyForm.value)">
+            <div class="form-group" style="position:relative; margin-top:10%;">
+              <label class="col-md-4 control-label" for="textinput"> Please Select a Vendor</label>  
+              <div class="col-md-4">
+              <select class="browser-default custom-select" required name="vendor" ngModel>
+                <option selected>Open this select menu</option>
+                <option *ngFor='let vendor of vendors' [value]="vendor.identifier">
+                  {{vendor.vendor_name}}
+                </option>
+              </select>
+              &nbsp;&nbsp;&nbsp;
+              <button  class="ui primary labeled icon button" >
+                <i class="unlock alternate icon"></i>
+                Submit
+              </button>
+              </div>
+            </div>
+          </form>
+  
+          </div>
+        </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <table  *ngIf="showTable" class="table table-striped" >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Activity</th>
+          <th>Level</th>
+          <th>Manager</th>
+          <th>Time</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of details;let c=index">
+          <th scope="row">{{c+1}}</th>
+          <td>{{i.vendor_name}}</td>
+          <td>{{i.activity}}</td>
+          <td>{{i.level}}</td>
+          <td>{{i.username}}</td>
+          <td>{{i.time}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button *ngIf= "showAdmin()" style = " position: relative; margin-left: 30%" (click)="showDetails()">Show Details</button>
+  

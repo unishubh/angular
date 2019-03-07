@@ -1,0 +1,183 @@
+<style>
+  input {
+    background-color: gainsboro;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  select {
+    background-color: gainsboro;
+  }
+</style>
+<section *ngIf="show">
+  <ul class="nav nav-pills">
+    <li class="getClass('1')">
+      <a (click)="goTo('detailsForm','companyContact')" data-toggle="tab">Company Contact</a>
+    </li>
+    <li id="tab2"><a (click)="goTo('detailsForm','contact')" data-toggle="tab">Contact
+        Information</a>
+    </li>
+    <li><a (click)="goTo('ert','companyDetails')" data-toggle="tab">Company Details</a>
+    </li>
+    <li><a (click)="goTo('ert','others')" data-toggle="tab">Other Information</a>
+    </li>
+    <li ><a (click)="goTo('ert','files')" data-toggle="tab"> Documents</a>
+    </li>
+  </ul>
+
+  <div class="ui raised very padded text container segment" id="22b">
+    <form #detailsForm="ngForm" class="form-horizontal editable">
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Contact Person</label>
+          <input id="textinput" name="textinput" type="text" [(ngModel)]="contact.contact_person" name="contact_person"
+            class="form-control input-md" placeholder="Contact Person" required pattern="[a-zA-Z ]*">
+          <div *ngIf="detailsForm.controls.contact_person.errors && detailsForm.controls.contact_person.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required with only aplhabets allowed.
+          </div>
+          <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Email</label>
+          <input id="textinput" name="textinput" type="email" name="email" class="form-control input-md"
+            [(ngModel)]="contact.email" required>
+          <div *ngIf="detailsForm.controls.email.errors && detailsForm.controls.email.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Designation</label>
+          <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
+            [(ngModel)]="contact.designation" placeholder="Designation" required>
+          <div *ngIf="detailsForm.controls.designation.errors && detailsForm.controls.designation.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Phone</label>
+          <input id="textinput" name="textinput" type="tel" name="contact_phone" class="form-control input-md"
+            [(ngModel)]="contact.contact_phone" required minlength="10" pattern="^[0-9]*$">
+          <div *ngIf="detailsForm.controls.contact_phone.errors && detailsForm.controls.contact_phone.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="col-md-4 col-md-offset-9">
+            <button id="singlebutton" (click)="submit(detailsForm)" [disabled]="!detailsForm.valid"
+              class="ui blue primary button">Save</button>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+
+          <button id="singlebutton" (click)="superSubmit('')" class=" negative ui button">Submit</button>
+
+        </div>
+      </div>
+      <br>
+
+      <br>
+
+      <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Contact Person</label>
+    <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" [(ngModel)]="contact.contact_person" name="contact_name"
+        class="form-control input-md">
+        <div *ngIf="!vendorForm2.controls['contact_name'].valid && vendorForm2.controls['contact_name'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+          *Required.
+        </div>
+      <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
+        *Please check this field.
+      </div>
+    </div>
+  </div> -->
+
+
+      <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Email</label>
+    <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md"
+        [(ngModel)]="contact.email">
+      <div *ngIf="!vendorForm2.controls['email'].valid  && vendorForm2.controls['email'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+        *Email Not valid.
+      </div>
+      <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
+        *Please check this field.
+      </div>
+    </div>
+  </div> -->
+
+
+      <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Designation</label>
+    <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
+        [(ngModel)]="contact.designation">
+        <div *ngIf="!vendorForm2.controls['designation'].valid && vendorForm2.controls['designation'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+          *Required.
+        </div>
+      <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
+        *Please check this field.
+      </div>
+    </div>
+  </div> -->
+
+      <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Phone</label>
+    <div class="col-md-4">
+      <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md"
+         [(ngModel)]="contact.contact_phone">
+      <div *ngIf="!vendorForm2.controls['contact_phone'].valid  && vendorForm2.controls['contact_phone'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+        *Phone Number Not valid, Only 10 digit numbers allowed.
+      </div>
+      <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+        *Please check this field.
+      </div>
+    </div>
+  </div> -->
+      <!-- <div class="form-group">
+    <label class="col-md-4 control-label" for="singlebutton"></label>
+    <div class="col-md-4 col-md-offset-1">
+      <button id="singlebutton" (click)="submit(personalForm)" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+  <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton"></label>
+      <div class="col-md-4 col-md-offset-1">
+        <button id="singlebutton" (click)="superSubmit('')" class="btn btn-primary">Submit</button>
+      </div>
+    </div> -->
+    </form>
+  </div>
+</section>

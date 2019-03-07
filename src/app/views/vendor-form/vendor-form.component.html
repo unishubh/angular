@@ -1,783 +1,1048 @@
+<!-- Main dcontent -->
 
-<!-- Main content -->
-<section *ngIf = "isForm1" class="content">
-
-
-  <div class="container">
+<div *ngIf="isData">
+  <section *ngIf="isForm1" class="content">
+    <div class="container">
       <h4> Vendor Contact Information</h4>
-  <form class="form-horizontal" [formGroup] = "vendorForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-  
-  <!-- Form Name -->
-  <!-- <div class="form-group">
-  <label class="col-md-4 control-label" for="textinput"><h3>Education System</h3></label> 
-  </div> -->
-  <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier"  value = "{{identifier}}" >
-  
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Name</label>  
-    <div class="col-md-4">
-    <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name = "name" formControlName="name" >
-      
-    </div>
-  </div> 
-  
-  
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Address</label>  
-    <div class="col-md-4">
-    <input id="textinput" name="textinput" type="text" name="address" class="form-control input-md" formControlName="address" >
-      
-    </div>
-  </div> 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">City</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="city" class="form-control input-md" formControlName="city" >
+      <form class="form-horizontal" [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+
         
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">PIN</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="pin_code" class="form-control input-md" formControlName="pin_code" >
-        
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Phone</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md" formControlName="phone" >
-        
-      </div>
-    </div>
+          <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+            value="{{identifier}}">
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">State</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="state" class="form-control input-md" formControlName="state" >
-        
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Name</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.vendor_name" class="form-control input-md"
+                name="name" formControlName="name">
+              <div *ngIf="!vendorForm.controls['name'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Name Not valid, Only characters allowed.
+              </div>
+              <div *ngIf="isTrue('Name')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Establishment Year</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="establishment_year" class="form-control input-md" formControlName="establishment_year" >
-        
-      </div>
-    </div>
+            </div>
+          </div>
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Website</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="website" class="form-control input-md" formControlName="website" >
-        
-      </div>
-    </div>
 
-    <hr><hr size="30">
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Address</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.office_address" name="address"
+                class="form-control input-md" formControlName="address">
+              <div *ngIf="isTrue('Address')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">City</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.city" name="city" class="form-control input-md"
+                formControlName="city">
+              <div *ngIf="isTrue('City')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">PIN</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.pin_code" name="pin_code" class="form-control input-md"
+                formControlName="pin_code">
+              <div *ngIf="!vendorForm.controls['pin_code'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *PIN Not valid, Only numbers allowed.
+              </div>
+              <div *ngIf="isTrue('PIN')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Phone</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.phone" name="phone" class="form-control input-md"
+                formControlName="phone">
+              <div *ngIf="!vendorForm.controls['phone'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Phone Number Not valid, Only 10 digit numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Contact Person</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="contact_name" class="form-control input-md" formControlName="contact_name" >
-        
-      </div>
-    </div>
-   
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Email</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md" formControlName="email" >
-        
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">State</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.state" name="state" class="form-control input-md"
+                formControlName="state">
+              <div *ngIf="isTrue('State')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-  
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Designation</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md" formControlName="designation" >
-        
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Establishment Year</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.establishment_year" name="establishment_year"
+                class="form-control input-md" formControlName="establishment_year">
+              <div *ngIf="!vendorForm.controls['establishment_year'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Year Not valid, Only 4 digit numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Establishment')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Phone</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md" formControlName="contact_phone" >
-        
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Website</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.website" name="website" class="form-control input-md"
+                formControlName="website">
+              <div *ngIf="isTrue('Website')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-<hr><hr size=30>
-<h4>Vendor Type</h4>
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput"> Type of Company</label>  
-  <div class="col-md-4">
-  <select class="browser-default custom-select" name="company_type" formControlName="company_type" >
-    <option selected>Open this select menu</option>
-    <option *ngFor='let type of company_type' [value]="type">
-      {{type}}
-    </option>
-  </select>
-  </div>
-</div> 
+          <hr>
+          <hr size="30">
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput"> Type of Industry</label>  
-  <div class="col-md-4">
-  <select class="browser-default custom-select" name="industry_type" formControlName="industry_type" >
-    <option selected>Open this select menu</option>
-    <option *ngFor='let type of industry_type' [value]="type">
-      {{type}}
-    </option>
-  </select>
-  </div>
-</div> 
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Contact Person</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" [ngModel]="details?.contact_name" name="contact_name"
+                class="form-control input-md" formControlName="contact_name">
+              <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput"> Vendor Type</label>  
-  <div class="col-md-4">
-  <select class="browser-default custom-select" name="vendor_type" formControlName="vendor_type" >
-    <option selected>Open this select menu</option>
-    <option *ngFor='let type of vendor_type' [value]="type">
-      {{type}}
-    </option>
-  </select>
-  </div>
-</div> 
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">GST No.</label>  
-  <div class="col-md-4">
-  <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md" formControlName="gst" >
-    
-  </div>
-</div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Email</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md"
+                formControlName="email" [ngModel]="details?.email">
+              <div *ngIf="!vendorForm.controls['email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Email Not valid.
+              </div>
+              <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">PAN</label>  
-  <div class="col-md-4">
-  <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md" formControlName="pan" >
-    
-  </div>
-</div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">SSI Details</label>  
-  <div class="col-md-4">
-  <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md" formControlName="ssi" >
-    
-  </div>
-</div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Designation</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
+                formControlName="designation" [ngModel]="details?.designation">
+              <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Effective Date</label>  
-  <div class="col-md-4">
-  <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md" formControlName="effective_date" >
-    
-  </div>
-</div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Phone</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md"
+                formControlName="contact_phone" [ngModel]="details?.contact_phone">
+              <div *ngIf="!vendorForm.controls['contact_phone'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Phone Number Not valid, Only 10 digit numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
 
-<hr><hr size=30>
-  <h4> Bank Details</h4>
+          <hr>
+          <hr size=30>
+          <h4>Vendor Type</h4>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> Type of Company</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="company_type" formControlName="company_type"
+                [ngModel]="details?.company_type">
+                <option selected>Open this select menu</option>
+                <option *ngFor='let type of company_type' [value]="type">
+                  {{type}}
+                </option>
+              </select>
+            </div>
+          </div>
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Bank</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md" formControlName="bank_name" >
-        
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Account Number</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md" formControlName="bank_account_number" >
-        
-      </div>
-    </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> Type of Industry</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="industry_type" formControlName="industry_type"
+                [ngModel]="details?.industry_type">
+                <option selected>Open this select menu</option>
+                <option *ngFor='let type of industry_type' [value]="type">
+                  {{type}}
+                </option>
+              </select>
+            </div>
+          </div>
 
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">IFSC</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md" formControlName="ifsc" >
-        
-      </div>
-    </div>
-  <hr><hr size = 30>
-  <h4> Promoters</h4>
-  <hr>
-    <div formArrayName = "promoters">
-      <div *ngFor= "let promoter of vendorForm.controls.promoters.controls; let promoterIndex=index;"  >
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> Vendor Type</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="vendor_type" formControlName="vendor_type" [ngModel]="details?.vendor_type">
+                <option selected>Open this select menu</option>
+                <option *ngFor='let type of vendor_type' [value]="type">
+                  {{type}}
+                </option>
+              </select>
+            </div>
+          </div>
 
-          <div class="form-group" [formGroupName] = "promoterIndex"  >
-              <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" >
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">GST No.</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md"
+                formControlName="gst" [ngModel]="details?.gst">
+              <div *ngIf="isTrue('GST')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">PAN</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md"
+                formControlName="pan" [ngModel]="details?.pan">
+              <div *ngIf="isTrue('PAN')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">SSI Details</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md"
+                formControlName="ssi" [ngModel]="details?.ssi">
+              <div *ngIf="isTrue('SSI')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Effective Date</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md"
+                formControlName="effective_date" [ngModel]="details?.effective_date">
+              <div *ngIf="isTrue('Effective')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4> Bank Details</h4>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Bank</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md"
+                formControlName="bank_name" [ngModel]="details?.bank_name">
+              <div *ngIf="isTrue('Bank')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Account Number</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md"
+                formControlName="bank_account_number" [ngModel]="details?.bank_account_number">
+              <div *ngIf="isTrue('Account Number')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">IFSC</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md"
+                formControlName="ifsc" [ngModel]="details?.ifsc">
+              <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <hr>
+          <hr size=30>
+          <h4> Promoters</h4>
+          <hr>
+          <div formArrayName="promoters">
+            <div *ngFor="let promoter of vendorForm.controls.promoters.controls; let promoterIndex=index;">
+
+              <div class="form-group" [formGroupName]="promoterIndex">
+                <label class="col-md-4 control-label" for="textinput">Promoter</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="promoter">
+
+                </div>
+              </div>
             </div>
 
-         <div class="form-group" [formGroupName] = "promoterIndex"  >
-             <label class="col-md-4 control-label" for="textinput">Promoter</label>  
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-7">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addPromoter()">Add more
+                Promoters</button>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4> Sales</h4>
+          <hr>
+
+          <div formArrayName="sales">
+            <div *ngFor="let sale of vendorForm.controls.sales.controls; let saleIndex=index;">
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                  value="{{identifier}}">
+              </div>
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <label class="col-md-4 control-label" for="textinput">Product Supplied</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_supplied">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <label class="col-md-4 control-label" for="textinput">Turnover</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="turnover">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <label class="col-md-4 control-label" for="textinput">Percent of total sales</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="percent">
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-7">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addSales()">Add more Sales</button>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4> Manufacturers</h4>
+          <hr>
+
+          <div formArrayName="manufacturers">
+            <div *ngFor="let maufacturer of vendorForm.controls.manufacturers.controls; let maufacturerIndex=index;">
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                  value="{{identifier}}">
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Location</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="location">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_type_man">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Number of Machines</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="number_of_machines">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="monthly_production_capacity">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Technical Workers</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="technical_workers">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Certification</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="certification">
+
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </div>
+
+          <!-- <div *ngIf = "isEdit" formArrayName = "manufacturers">
+      <div *ngFor= "let maufacturer of manufacturers; let maufacturerIndex=index;"  >
+          <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+              <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" >
+            </div>
+  
+         <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+             <label class="col-md-4 control-label" for="textinput">Location</label>  
              <div class="col-md-4">
-             <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="promoter" >
+             <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="location" value = "{{maufacturer?.location}}" >
                
              </div>
            </div> 
+  
+           <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+            <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>  
+            <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product_type_man" value = "{{maufacturer?.product_type}}" >
+              
+            </div>
+          </div> 
+  
+          <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+            <label class="col-md-4 control-label" for="textinput">Number of Machines</label>  
+            <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="number_of_machines" value = "{{maufacturer?.num_of_machines}}" >
+              
+            </div>
+          </div> 
+  
+          <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+            <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>  
+            <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="monthly_production_capacity" value = "{{maufacturer?.monthly_production_capacity}}" >
+              
+            </div>
+          </div> 
+  
+          <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+            <label class="col-md-4 control-label" for="textinput">Technical Workers</label>  
+            <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="technical_workers" value = "{{maufacturer?.technical_workers}}" >
+              
+            </div>
+          </div> 
+  
+          <div class="form-group" [formGroupName] = "maufacturerIndex"  >
+            <label class="col-md-4 control-label" for="textinput">Certification</label>  
+            <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="certification" value = "{{maufacturer?.certifications}}" >
+              
+            </div>
+          </div>
+  
+         
+  
       </div>
     
-    </div> 
+    </div> -->
 
-    
-    <div class="form-group">
-     <label class="col-md-4 control-label" for="singlebutton"></label>
-     <div class="col-md-4 col-md-offset-7">
-       <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addPromoter()">Add more Promoters</button>
-     </div>
-   </div> 
-
-   <hr><hr size = 30>
-   <h4> Sales</h4>
-   <hr>
-
-   <div formArrayName = "sales">
-    <div *ngFor= "let sale of vendorForm.controls.sales.controls; let saleIndex=index;"  >
-
-        <div class="form-group" [formGroupName] = "saleIndex"  > 
-            <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" > 
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-7">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addManufacturer()">Add more
+                Manufacturers</button>
+            </div>
           </div>
 
-       <div class="form-group" [formGroupName] = "saleIndex"  >
-           <label class="col-md-4 control-label" for="textinput">Product Supplied</label>  
-           <div class="col-md-4">
-           <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product_supplied" >
-             
-           </div>
-         </div> 
 
-         <div class="form-group" [formGroupName] = "saleIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Turnover</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="turnover" >
-            
+
+
+
+
+
+
+
+
+          <hr>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-1">
+              <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
           </div>
-        </div> 
-
-        <div class="form-group" [formGroupName] = "saleIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Percent of total sales</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="percent" >
-            
-          </div>
-        </div> 
-    </div>
-  
-  </div>
-
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="singlebutton"></label>
-    <div class="col-md-4 col-md-offset-7">
-      <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addSales()">Add more Sales</button>
-    </div>
-  </div> 
-
-  <hr><hr size = 30>
-  <h4> Manufacturers</h4>
-  <hr>
-
-  <div formArrayName = "manufacturers">
-    <div *ngFor= "let maufacturer of vendorForm.controls.manufacturers.controls; let maufacturerIndex=index;"  >
-        <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-            <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" >
-          </div>
-
-       <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-           <label class="col-md-4 control-label" for="textinput">Location</label>  
-           <div class="col-md-4">
-           <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="location" >
-             
-           </div>
-         </div> 
-
-         <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product_type_man" >
-            
-          </div>
-        </div> 
-
-        <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Number of Machines</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="number_of_machines" >
-            
-          </div>
-        </div> 
-
-        <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="monthly_production_capacity" >
-            
-          </div>
-        </div> 
-
-        <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Technical Workers</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="technical_workers" >
-            
-          </div>
-        </div> 
-
-        <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-          <label class="col-md-4 control-label" for="textinput">Certification</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="certification" >
-            
-          </div>
-        </div>
-
-       
+        </fieldset>
+      </form>
 
     </div>
-  
-  </div>
 
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="singlebutton"></label>
-    <div class="col-md-4 col-md-offset-7">
-      <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addManufacturer()">Add more Manufacturers</button>
-    </div>
-  </div>
-  
- 
-
-  <hr>
-
-  <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4 col-md-offset-1">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-      </div>
-    </div> 
-  </fieldset>
-  </form>
-  
-  </div>
-  
   </section>
 
 
-  <section *ngIf = "isForm2" class="content">
+  <section *ngIf="isForm2" class="content">
 
 
-      <div class="container">
-          <h4> Vendor Contact Information</h4>
-      <form class="form-horizontal" [formGroup] = "vendorForm2" (ngSubmit)="onSubmit()">
-      <fieldset>
-      
-      <!-- Form Name -->
-      <!-- <div class="form-group">
+    <div class="container">
+      <h4> Vendor Contact Information</h4>
+      <form class="form-horizontal" [formGroup]="vendorForm2" (ngSubmit)="onSubmit()">
+        <fieldset>
+
+          <!-- Form Name -->
+          <!-- <div class="form-group">
       <label class="col-md-4 control-label" for="textinput"><h3>Education System</h3></label> 
       </div> -->
-      <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier"  value = "{{identifier}}" >
-      
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Name</label>  
-        <div class="col-md-4">
-        <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name = "name" formControlName="name" >
-          
-        </div>
-      </div> 
-      
-      
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Address</label>  
-        <div class="col-md-4">
-        <input id="textinput" name="textinput" type="text" name="address" class="form-control input-md" formControlName="address" >
-          
-        </div>
-      </div> 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">City</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="city" class="form-control input-md" formControlName="city" >
-            
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">PIN</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="pin_code" class="form-control input-md" formControlName="pin_code" >
-            
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Phone</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md" formControlName="phone" >
-            
-          </div>
-        </div>
-    
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">State</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="state" class="form-control input-md" formControlName="state" >
-            
-          </div>
-        </div>
-    
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Establishment Year</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="establishment_year" class="form-control input-md" formControlName="establishment_year" >
-            
-          </div>
-        </div>
-    
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Website</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="website" class="form-control input-md" formControlName="website" >
-            
-          </div>
-        </div>
-    
-        <hr><hr size="30">
-    
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Contact Person</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="contact_name" class="form-control input-md" formControlName="contact_name" >
-            
-          </div>
-        </div>
-       
-        
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Email</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md" formControlName="email" >
-            
-          </div>
-        </div>
-    
-      
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Designation</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md" formControlName="designation" >
-            
-          </div>
-        </div>
-    
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Phone</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md" formControlName="contact_phone" >
-            
-          </div>
-        </div>
-    
-    <hr><hr size=30>
-    <h4>Vendor Type</h4>
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput"> Type of Company</label>  
-      <div class="col-md-4">
-      <select class="browser-default custom-select" name="company_type" formControlName="company_type" >
-        <option selected>Open this select menu</option>
-        <option *ngFor='let type of company_type' [value]="type">
-          {{type}}
-        </option>
-      </select>
-      </div>
-    </div> 
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput"> Type of Industry</label>  
-      <div class="col-md-4">
-      <select class="browser-default custom-select" name="industry_type" formControlName="industry_type" >
-        <option selected>Open this select menu</option>
-        <option *ngFor='let type of industry_type' [value]="type">
-          {{type}}
-        </option>
-      </select>
-      </div>
-    </div> 
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput"> Vendor Type</label>  
-      <div class="col-md-4">
-      <select class="browser-default custom-select" name="vendor_type" formControlName="vendor_type" >
-        <option selected>Open this select menu</option>
-        <option *ngFor='let type of vendor_type' [value]="type">
-          {{type}}
-        </option>
-      </select>
-      </div>
-    </div> 
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">GST No.</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md" formControlName="gst" >
-        
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">PAN</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md" formControlName="pan" >
-        
-      </div>
-    </div>
+          <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+            value="{{identifier}}">
 
-    <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Aadhar Number</label>  
-        <div class="col-md-4">
-        <input id="textinput" name="textinput" type="text" name="aadhar" class="form-control input-md" formControlName="aadhar" >
-          
-        </div>
-      </div>
-
-      <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">ESIC No.</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="esic" class="form-control input-md" formControlName="esic" >
-            
-          </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">Provident Fund No.</label>  
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Name</label>
             <div class="col-md-4">
-            <input id="textinput" name="textinput" type="text" name="pf" class="form-control input-md" formControlName="pf" >
-              
+              <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name="name"
+                formControlName="name" [ngModel]="details?.vendor_name">
+              <div *ngIf="!vendorForm2.controls['name'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Name Not valid, Only characters allowed.
+              </div>
+              <div *ngIf="isTrue('Name')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+
             </div>
           </div>
 
+
           <div class="form-group">
-              <label class="col-md-4 control-label" for="textinput">Excise Registration No. (if any)</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text" name="exice" class="form-control input-md" formControlName="exice" >
-                
+            <label class="col-md-4 control-label" for="textinput">Address</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="address" class="form-control input-md"
+                formControlName="address" [ngModel]="details?.office_address">
+              <div *ngIf="isTrue('Address')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
               </div>
             </div>
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">SSI Details</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md" formControlName="ssi" >
-        
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Effective Date</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md" formControlName="effective_date" >
-        
-      </div>
-    </div>
-    
-    <hr><hr size=30>
-      <h4> Bank Details</h4>
-    
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Bank</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md" formControlName="bank_name" >
-            
           </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Account Number</label>  
-          <div class="col-md-4">
-          <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md" formControlName="bank_account_number" >
-            
-          </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="textinput">IFSC</label>  
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">City</label>
             <div class="col-md-4">
-            <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md" formControlName="ifsc" >
-              
+              <input id="textinput" name="textinput" type="text" name="city" class="form-control input-md"
+                formControlName="city" [ngModel]="details?.city">
+              <div *ngIf="isTrue('City')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">PIN</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="pin_code" class="form-control input-md"
+                formControlName="pin_code" [ngModel]="details?.pin_code">
+              <div *ngIf="!vendorForm2.controls['pin_code'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *PIN Not valid, Only numbers allowed.
+              </div>
+              <div *ngIf="isTrue('PIN')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Phone</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md"
+                formControlName="phone" [ngModel]="details?.phone">
+              <div *ngIf="!vendorForm2.controls['phone'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Phone Not valid, Only numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
             </div>
           </div>
 
           <div class="form-group">
-              <label class="col-md-4 control-label" for="textinput"> TDS Section Applicable</label>  
-              <div class="col-md-4">
-              <select class="browser-default custom-select" name="tds" formControlName="tds" >
+            <label class="col-md-4 control-label" for="textinput">State</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="state" class="form-control input-md"
+                formControlName="state" [ngModel]="details?.state">
+              <div *ngIf="isTrue('State')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Establishment Year</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="establishment_year" class="form-control input-md"
+                formControlName="establishment_year" [ngModel]="details?.establishment_year">
+              <div *ngIf="!vendorForm2.controls['establishment_year'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Phone Not valid, Only 10 digit numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Establishment')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Website</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="website" class="form-control input-md"
+                formControlName="website" [ngModel]="details?.website">
+              <div *ngIf="isTrue(Website)" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+
+            </div>
+          </div>
+
+          <hr>
+          <hr size="30">
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Contact Person</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="contact_name" class="form-control input-md"
+                formControlName="contact_name" [ngModel]="details?.contact_name">
+              <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Email</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md"
+                formControlName="email" [ngModel]="details?.email">
+              <div *ngIf="!vendorForm2.controls['email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                *Email Not valid.
+              </div>
+              <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Designation</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
+                formControlName="designation" [ngModel]="details?.designation">
+              <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Phone</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md"
+                formControlName="contact_phone" [ngModel]="details?.contact_phone">
+              <div *ngIf="!vendorForm2.controls['contact_phone'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                **Phone Not valid, Only 10 digit numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4>Vendor Type</h4>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> Type of Company</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="company_type" formControlName="company_type"
+                [ngModel]="details?.company_type">
+                <option selected>Open this select menu</option>
+                <option *ngFor='let type of company_type' [value]="type">
+                  {{type}}
+                </option>
+              </select>
+              <div *ngIf="isTrue('Type of Company')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> Type of Industry</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="industry_type" formControlName="industry_type"
+                [ngModel]="details?.industry_type">
+                <option selected>Open this select menu</option>
+                <option *ngFor='let type of industry_type' [value]="type">
+                  {{type}}
+                </option>
+              </select>
+              <div *ngIf="isTrue('Type of Industry')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> Vendor Type</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="vendor_type" formControlName="vendor_type" [ngModel]="details?.vendor_type">
+                <option selected>Open this select menu</option>
+                <option *ngFor='let type of vendor_type' [value]="type">
+                  {{type}}
+                </option>
+              </select>
+              <div *ngIf="isTrue('Vendor Type')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">GST No.</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md"
+                formControlName="gst" [ngModel]="details?.gst">
+              <div *ngIf="isTrue('GST')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">PAN</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md"
+                formControlName="pan" [ngModel]="details?.pan">
+              <div *ngIf="isTrue('PAN')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Aadhar Number</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="aadhar" class="form-control input-md"
+                formControlName="aadhar" [ngModel]="details?.aadhar">
+              <div *ngIf="!vendorForm2.controls['aadhar'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                **Aadhar Not valid, Only 12 digit numbers allowed.
+              </div>
+              <div *ngIf="isTrue('Aadhar')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">ESIC No.</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="esic" class="form-control input-md"
+                formControlName="esic" [ngModel]="details?.esic">
+              <div *ngIf="isTrue('ESIC')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Provident Fund No.</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="pf" class="form-control input-md"
+                formControlName="pf" [ngModel]="details?.pf">
+              <div *ngIf="isTrue('Provident')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Excise Registration No. (if any)</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="exice" class="form-control input-md"
+                formControlName="exice" [ngModel]="details?.exice">
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">SSI Details</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md"
+                formControlName="ssi" [ngModel]="details?.ssi">
+              <div *ngIf="isTrue('SSI Details')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Effective Date</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md"
+                formControlName="effective_date" [ngModel]="details?.effective_date">
+              <div *ngIf="isTrue('Effective Date')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4> Bank Details</h4>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Bank</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md"
+                formControlName="bank_name" [ngModel]="details?.bank_name">
+              <div *ngIf="isTrue('Bank')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Account Number</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md"
+                formControlName="bank_account_number" [ngModel]="details?.bank_account_number">
+              <div *ngIf="isTrue('Account Number')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">IFSC</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md"
+                formControlName="ifsc" [ngModel]="details?.ifsc">
+              <div *ngIf="isTrue('IFSC')" class="my_alert" style="margin-top: 3px; color: red">
+                *Please check this field.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput"> TDS Section Applicable</label>
+            <div class="col-md-4">
+              <select class="browser-default custom-select" name="tds" formControlName="tds" [ngModel]="details?.tds">
                 <option selected>Open this select menu</option>
                 <option value="YES">Yes </option>
                 <option value="NO">No </option>
               </select>
-              </div>
-            </div> 
-      <hr><hr size = 30>
-      <h4> Promoters</h4>
-      <hr>
-        <div formArrayName = "promoters">
-          <div *ngFor= "let promoter of vendorForm2.controls.promoters.controls; let promoterIndex=index;"  >
-    
-              <div class="form-group" [formGroupName] = "promoterIndex"  >
-                  <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" >
-                </div>
-    
-             <div class="form-group" [formGroupName] = "promoterIndex"  >
-                 <label class="col-md-4 control-label" for="textinput">Promoter</label>  
-                 <div class="col-md-4">
-                 <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="promoter" >
-                   
-                 </div>
-               </div> 
+            </div>
           </div>
-        
-        </div> 
-    
-        
-        <div class="form-group">
-         <label class="col-md-4 control-label" for="singlebutton"></label>
-         <div class="col-md-4 col-md-offset-7">
-           <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addPromoter()">Add more Promoters</button>
-         </div>
-       </div> 
-    
-       <hr><hr size = 30>
-       <h4> Sales</h4>
-       <hr>
-    
-       <div formArrayName = "sales">
-        <div *ngFor= "let sale of vendorForm2.controls.sales.controls; let saleIndex=index;"  >
-    
-            <div class="form-group" [formGroupName] = "saleIndex"  > 
-                <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" > 
+          <hr>
+          <hr size=30>
+          <h4> Promoters</h4>
+          <hr>
+          <div formArrayName="promoters">
+            <div *ngFor="let promoter of vendorForm2.controls.promoters.controls; let promoterIndex=index;">
+
+              <div class="form-group" [formGroupName]="promoterIndex">
+                <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                  value="{{identifier}}">
               </div>
-    
-           <div class="form-group" [formGroupName] = "saleIndex"  >
-               <label class="col-md-4 control-label" for="textinput">Product Supplied</label>  
-               <div class="col-md-4">
-               <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product_supplied" >
-                 
-               </div>
-             </div> 
-    
-             <div class="form-group" [formGroupName] = "saleIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Turnover</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="turnover" >
-                
-              </div>
-            </div> 
-    
-            <div class="form-group" [formGroupName] = "saleIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Percent of total sales</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="percent" >
-                
-              </div>
-            </div> 
-        </div>
-      
-      </div>
-    
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="singlebutton"></label>
-        <div class="col-md-4 col-md-offset-7">
-          <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addSales()">Add more Sales</button>
-        </div>
-      </div> 
-    
-      <hr><hr size = 30>
-      <h4> Manufacturers</h4>
-      <hr>
-    
-      <div formArrayName = "manufacturers">
-        <div *ngFor= "let maufacturer of vendorForm2.controls.manufacturers.controls; let maufacturerIndex=index;"  >
-            <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-                <input id="textinput" name="textinput" type="hidden"  class="form-control input-md"  formControlName="identifier" value = "{{identifier}}" >
-              </div>
-    
-           <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-               <label class="col-md-4 control-label" for="textinput">Location</label>  
-               <div class="col-md-4">
-               <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="location" >
-                 
-               </div>
-             </div> 
-    
-             <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product_type_man" >
-                
-              </div>
-            </div> 
-    
-            <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Number of Machines</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="number_of_machines" >
-                
-              </div>
-            </div> 
-    
-            <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="monthly_production_capacity" >
-                
-              </div>
-            </div> 
-    
-            <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Technical Workers</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="technical_workers" >
-                
-              </div>
-            </div> 
-    
-            <div class="form-group" [formGroupName] = "maufacturerIndex"  >
-              <label class="col-md-4 control-label" for="textinput">Certification</label>  
-              <div class="col-md-4">
-              <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="certification" >
-                
+
+              <div class="form-group" [formGroupName]="promoterIndex">
+                <label class="col-md-4 control-label" for="textinput">Promoter</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="promoter">
+
+                </div>
               </div>
             </div>
-    
-           
-    
-        </div>
-      
-      </div>
-    
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="singlebutton"></label>
-        <div class="col-md-4 col-md-offset-7">
-          <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addManufacturer()">Add more Manufacturers</button>
-        </div>
-      </div>
-      
-     
-    
-      <hr>
-    
-      <div class="form-group">
-          <label class="col-md-4 control-label" for="singlebutton"></label>
-          <div class="col-md-4 col-md-offset-1">
-            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+
           </div>
-        </div> 
-      </fieldset>
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-7">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addPromoter()">Add more
+                Promoters</button>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4> Sales</h4>
+          <hr>
+
+          <div formArrayName="sales">
+            <div *ngFor="let sale of vendorForm2.controls.sales.controls; let saleIndex=index;">
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                  value="{{identifier}}">
+              </div>
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <label class="col-md-4 control-label" for="textinput">Product Supplied</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_supplied">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <label class="col-md-4 control-label" for="textinput">Turnover</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="turnover">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="saleIndex">
+                <label class="col-md-4 control-label" for="textinput">Percent of total sales</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="percent">
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-7">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addSales()">Add more Sales</button>
+            </div>
+          </div>
+
+          <hr>
+          <hr size=30>
+          <h4> Manufacturers</h4>
+          <hr>
+
+          <div formArrayName="manufacturers">
+            <div *ngFor="let maufacturer of vendorForm2.controls.manufacturers.controls; let maufacturerIndex=index;">
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                  value="{{identifier}}">
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Location</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="location">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_type_man">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Number of Machines</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="number_of_machines">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="monthly_production_capacity">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Technical Workers</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="technical_workers">
+
+                </div>
+              </div>
+
+              <div class="form-group" [formGroupName]="maufacturerIndex">
+                <label class="col-md-4 control-label" for="textinput">Certification</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="certification">
+
+                </div>
+              </div>
+
+
+
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-7">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addManufacturer()">Add more
+                Manufacturers</button>
+            </div>
+          </div>
+
+
+
+          <hr>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-1">
+              <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </fieldset>
       </form>
-      
-      </div>
-      
-      </section>
+
+    </div>
+
+  </section>
+</div>

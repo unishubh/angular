@@ -1,0 +1,19 @@
+<table  class="table table-striped" >
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th *ngIf="isReject">View Details</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of array;let c=index">
+      <th scope="row">{{c+1}}</th>
+      <td *ngIf = "this.isName">{{i.vendor_name}}</td>
+      <td *ngIf="isEmail">{{i.vendor_email}}</td>
+      <td *ngIf="isReject"><a a [routerLink]="['/starter/vendorDetails', i.vendor_id]"><button class="btn btn-primary">View Details</button></a> </td>
+    </tr>
+  </tbody>
+</table>

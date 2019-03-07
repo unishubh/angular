@@ -1,0 +1,1067 @@
+<style>
+
+</style>
+
+<div *ngIf="isData">
+  <section *ngIf="isForm1">
+    <div id="exTab3" class="container">
+      <form class="form-horizontal" [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <ul class="nav nav-pills">
+            <li class="getClass('1')">
+              <a href="#1b" data-toggle="tab">Company Contact</a>
+            </li>
+            <li id="tab2" class="getClass('2')"><a href="#2b" data-toggle="tab">Contact Information</a>
+            </li>
+            <li class="getClass('3')"><a href="#3b" data-toggle="tab">Company Details</a>
+            </li>
+            <li class="getClass('4')"><a href="#4b" data-toggle="tab">Other Information</a>
+            </li>
+          </ul>
+
+          <div class="tab-content clearfix">
+            <div class="tab-pane active" id="1b">
+              <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                value="{{identifier}}">
+              <!-- <table style="margin-left: 10%; width:70%;">
+                <tr>
+                  <td colspan="2"> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Name</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.vendor_name" class="form-control input-md"
+                          name="name" formControlName="name">
+                        <div *ngIf="!vendorForm.controls['name'].valid && vendorForm.controls['name'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *Name Not valid, Only characters allowed.
+                        </div>
+                        <div *ngIf="isTrue('Name')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td colspan="2"> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Address</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.office_address" name="address"
+                          class="form-control input-md" formControlName="address">
+                          <div *ngIf="!vendorForm.controls['address'].valid && vendorForm.controls['address'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Cannot be empty.
+                          </div>
+                        <div *ngIf="isTrue('Address')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td colspan="1"> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">City</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.city" name="city" class="form-control input-md"
+                          formControlName="city">
+                          <div *ngIf="!vendorForm.controls['city'].valid && vendorForm.controls['city'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Required
+                          </div>
+                        <div *ngIf="isTrue('City')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">PIN</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.pin_code" name="pin_code"
+                          class="form-control input-md" formControlName="pin_code">
+                        <div *ngIf="!vendorForm.controls['pin_code'].valid && vendorForm.controls['pin_code'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *PIN Not valid, Only numbers allowed.
+                        </div>
+                        <div *ngIf="isTrue('PIN')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Phone</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.phone" name="phone"
+                          class="form-control input-md" formControlName="phone">
+                        <div *ngIf="!vendorForm.controls['phone'].valid && vendorForm.controls['phone'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *Phone Number Not valid, Only 10 digit numbers allowed.
+                        </div>
+                        <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">State</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.state" name="state"
+                          class="form-control input-md" formControlName="state">
+                          <div *ngIf="!vendorForm.controls['state'].valid && vendorForm.controls['state'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Phone Number Not valid, Only 10 digit numbers allowed.
+                          </div>
+                        <div *ngIf="isTrue('State')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Establishment Year</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.establishment_year" name="establishment_year"
+                          class="form-control input-md" formControlName="establishment_year">
+                        <div *ngIf="!vendorForm.controls['establishment_year'].valid && vendorForm.controls['establishment_year'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *Year Not valid, Only 4 digit numbers allowed.
+                        </div>
+                        <div *ngIf="isTrue('Establishment')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Website</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.website" name="website"
+                          class="form-control input-md" formControlName="website">
+                          <div *ngIf="!vendorForm.controls['website'].valid && vendorForm.controls['website'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Required
+                          </div>
+                        <div *ngIf="isTrue('Website')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+              </table> -->
+            </div>
+
+            <div class="tab-pane" id="2b">
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Contact Person</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" [ngModel]="details?.contact_name" name="contact_name"
+                    class="form-control input-md" formControlName="contact_name">
+                    <div *ngIf="!vendorForm.controls['establishment_year'].valid && vendorForm.controls['establishment_year'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                      *Required
+                    </div>
+                  <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Email</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md"
+                    formControlName="email" [ngModel]="details?.email">
+                  <div *ngIf="!vendorForm.controls['email'].valid && vendorForm.controls['email'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                    *Email Not valid.
+                  </div>
+                  <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Designation</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
+                    formControlName="designation" [ngModel]="details?.designation">
+                    <div *ngIf="!vendorForm.controls['email'].valid && vendorForm.controls['designation'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      *Required.
+                    </div>
+                  <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Phone</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md"
+                    formControlName="contact_phone" [ngModel]="details?.contact_phone">
+                  <div *ngIf="!vendorForm.controls['contact_phone'].valid && vendorForm.controls['contact_phone'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                    *Phone Number Not valid, Only 10 digit numbers allowed.
+                  </div>
+                  <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="3b">
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"> Type of Company</label>
+                <div class="col-md-4">
+                  <select class="browser-default custom-select" name="company_type" formControlName="company_type"
+                    [ngModel]="details?.company_type">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor='let type of company_type' [value]="type">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"> Type of Industry</label>
+                <div class="col-md-4">
+                  <select class="browser-default custom-select" name="industry_type" formControlName="industry_type"
+                    [ngModel]="details?.industry_type">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor='let type of industry_type' [value]="type">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"> Vendor Type</label>
+                <div class="col-md-4">
+                  <select class="browser-default custom-select" name="vendor_type" formControlName="vendor_type"
+                    [ngModel]="details?.vendor_type">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor='let type of vendor_type' [value]="type">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">GST No.</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md"
+                    formControlName="gst" [ngModel]="details?.gst">
+                    <div *ngIf="!vendorForm.controls['gst'].valid && vendorForm.controls['gst'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      *required
+                    </div>
+                  <div *ngIf="isTrue('GST')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">PAN</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md"
+                    formControlName="pan" [ngModel]="details?.pan">
+                    <div *ngIf="!vendorForm.controls['pan'].valid && vendorForm.controls['pan'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      *Required
+                    </div>
+                  <div *ngIf="isTrue('PAN')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">SSI Details</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md"
+                    formControlName="ssi" [ngModel]="details?.ssi">
+                    <div *ngIf="!vendorForm.controls['ssi'].valid && vendorForm.controls['ssi'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      *Required
+                    </div>
+                  <div *ngIf="isTrue('SSI')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Effective Date</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md"
+                    formControlName="effective_date" [ngModel]="details?.effective_date">
+                    <div *ngIf="!vendorForm.controls['effective_date'].valid && vendorForm.controls['effective_date'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      *Date is required
+                    </div>
+                  <div *ngIf="isTrue('Effective')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Bank</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md"
+                    formControlName="bank_name" [ngModel]="details?.bank_name">
+                    <div *ngIf="!vendorForm.controls['bank_name'].valid && vendorForm.controls['bank_name'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      * Bankis required.
+                    </div>
+                  <div *ngIf="isTrue('Bank')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Account Number</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md"
+                    formControlName="bank_account_number" [ngModel]="details?.bank_account_number">
+                    <div *ngIf="!vendorForm.controls['bank_account_number'].valid && vendorForm.controls['bank_account_number'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      * Account Number is required.
+                    </div>
+                  <div *ngIf="isTrue('Account Number')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">IFSC</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md"
+                    formControlName="ifsc" [ngModel]="details?.ifsc">
+                    <div *ngIf="!vendorForm.controls['ifsc'].valid && vendorForm.controls['ifsc'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      *IFSC is required.
+                    </div>
+                  <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="4b">
+              <div formArrayName="promoters">
+                <div *ngFor="let promoter of vendorForm.controls.promoters.controls; let promoterIndex=index;">
+
+                  <div class="form-group" [formGroupName]="promoterIndex">
+                    <label class="col-md-4 control-label" for="textinput">Promoter</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="promoter">
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4 col-md-offset-7">
+                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addPromoter()">Add more
+                    Promoters</button>
+                </div>
+              </div>
+
+              <div formArrayName="sales">
+                <div *ngFor="let sale of vendorForm.controls.sales.controls; let saleIndex=index;">
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                      value="{{identifier}}">
+                  </div>
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <label class="col-md-4 control-label" for="textinput">Product Supplied</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_supplied">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <label class="col-md-4 control-label" for="textinput">Turnover</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="turnover">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <label class="col-md-4 control-label" for="textinput">Percent of total sales</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="percent">
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4 col-md-offset-7">
+                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addSales()">Add more Sales</button>
+                </div>
+              </div>
+              <div formArrayName="manufacturers">
+                <div *ngFor="let maufacturer of vendorForm.controls.manufacturers.controls; let maufacturerIndex=index;">
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                      value="{{identifier}}">
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Location</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="location">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_type_man">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Number of Machines</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="number_of_machines">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="monthly_production_capacity">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Technical Workers</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="technical_workers">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Certification</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="certification">
+
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4 col-md-offset-7">
+                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addManufacturer()">Add more
+                    Manufacturers</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-1">
+              <button id="singlebutton" name="singlebutton"  class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <section *ngIf="isForm2">
+    <div id="exTab3" class="container">
+      <form class="form-horizontal" [formGroup]="vendorForm2" (ngSubmit)="onSubmit()">
+        <fieldset>
+          <ul class="nav nav-pills">
+            <li class="getClass('1')">
+              <a href="#12b" data-toggle="tab">Company Contact</a>
+            </li>
+            <li id="tab2" class="getClass('2')"><a href="#22b" data-toggle="tab">Contact Person</a>
+            </li>
+            <li class="getClass('3')"><a href="#32b" data-toggle="tab">Company Details</a>
+            </li>
+            <li class="getClass('4')"><a href="#42b" data-toggle="tab">Other Information</a>
+            </li>
+          </ul>
+
+          <div class="tab-content clearfix">
+            <div class="tab-pane active" id="12b">
+              <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                value="{{identifier}}">
+              <!-- <table style="margin-left: 10%; width:70%;">
+                <tr>
+                  <td colspan="2"> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Name</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md"
+                          name="name" formControlName="name" [ngModel]="details?.vendor_name">
+                          <div *ngIf="!vendorForm2.controls['name'].valid && vendorForm2.controls['name'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Name Not valid, Only characters allowed.
+                          </div>
+                        <div *ngIf="isTrue('Name')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td colspan="2"> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Address</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" name="address" class="form-control input-md"
+                          formControlName="address" [ngModel]="details?.office_address">
+                          <div *ngIf="!vendorForm2.controls['address'].valid && vendorForm2.controls['address'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Required.
+                          </div>
+                        <div *ngIf="isTrue('Address')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td colspan="1"> -->
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">City</label>
+                          <div class="col-md-4">
+                            <input id="textinput" name="textinput" type="text" name="city" class="form-control input-md"
+                              formControlName="city" [ngModel]="details?.city">
+                              <div *ngIf="!vendorForm2.controls['city'].valid && vendorForm2.controls['city'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                                *Required.
+                              </div>
+                            <div *ngIf="isTrue('City')" class="my_alert" style="margin-top: 3px; color: red">
+                              *Please check this field.
+                            </div>
+                          </div>
+                        </div>
+                  <!-- </td>
+                  <td> -->
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">PIN</label>
+                          <div class="col-md-4">
+                            <input id="textinput" name="textinput" type="text" name="pin_code" class="form-control input-md"
+                              formControlName="pin_code" [ngModel]="details?.pin_code">
+                            <div *ngIf="!vendorForm2.controls['pin_code'].valid  && vendorForm2.controls['pin_code'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                              *PIN Not valid, Only numbers allowed.
+                            </div>
+                            <div *ngIf="isTrue('PIN')" class="my_alert" style="margin-top: 3px; color: red">
+                              *Please check this field.
+                            </div>
+                          </div>
+                        </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td> -->
+                      <div class="form-group">
+                          <label class="col-md-4 control-label" for="textinput">Phone</label>
+                          <div class="col-md-4">
+                            <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md"
+                              formControlName="phone" [ngModel]="details?.phone">
+                            <div *ngIf="!vendorForm2.controls['phone'].valid  && vendorForm2.controls['phone'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                              *Phone Not valid, Only numbers allowed.
+                            </div>
+                            <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                              *Please check this field.
+                            </div>
+                          </div>
+                        </div>
+                  <!-- </td>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">State</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.state" name="state"
+                          class="form-control input-md" formControlName="state">
+                          <div *ngIf="!vendorForm2.controls['state'].valid && vendorForm2.controls['state'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Required.
+                          </div>
+                        <div *ngIf="isTrue('State')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+                <tr>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Establishment Year</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.establishment_year" name="establishment_year"
+                          class="form-control input-md" formControlName="establishment_year">
+                        <div *ngIf="!vendorForm2.controls['establishment_year'].valid  && vendorForm2.controls['establishment_year'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *Year Not valid, Only 4 digit numbers allowed.
+                        </div>
+                        <div *ngIf="isTrue('Establishment')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                  <td> -->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="textinput">Website</label>
+                      <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" [ngModel]="details?.website" name="website"
+                          class="form-control input-md" formControlName="website">
+                          <div *ngIf="!vendorForm2.controls['website'].valid && vendorForm2.controls['website'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Required.
+                          </div>
+                        <div *ngIf="isTrue('Website')" class="my_alert" style="margin-top: 3px; color: red">
+                          *Please check this field.
+                        </div>
+                      </div>
+                    </div>
+                  <!-- </td>
+                </tr>
+              </table> -->
+            </div>
+
+            <div class="tab-pane" id="22b">
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Contact Person</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" [ngModel]="details?.contact_name" name="contact_name"
+                    class="form-control input-md" formControlName="contact_name">
+                    <div *ngIf="!vendorForm2.controls['contact_name'].valid && vendorForm2.controls['contact_name'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                      *Required.
+                    </div>
+                  <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Email</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md"
+                    formControlName="email" [ngModel]="details?.email">
+                  <div *ngIf="!vendorForm2.controls['email'].valid  && vendorForm2.controls['email'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                    *Email Not valid.
+                  </div>
+                  <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Designation</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
+                    formControlName="designation" [ngModel]="details?.designation">
+                    <div *ngIf="!vendorForm2.controls['designation'].valid && vendorForm2.controls['designation'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                      *Required.
+                    </div>
+                  <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Phone</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="contact_phone" class="form-control input-md"
+                    formControlName="contact_phone" [ngModel]="details?.contact_phone">
+                  <div *ngIf="!vendorForm2.controls['contact_phone'].valid  && vendorForm2.controls['contact_phone'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                    *Phone Number Not valid, Only 10 digit numbers allowed.
+                  </div>
+                  <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="32b">
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"> Type of Company</label>
+                <div class="col-md-4">
+                  <select class="browser-default custom-select" name="company_type" formControlName="company_type"
+                    [ngModel]="details?.company_type">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor='let type of company_type' [value]="type">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"> Type of Industry</label>
+                <div class="col-md-4">
+                  <select class="browser-default custom-select" name="industry_type" formControlName="industry_type"
+                    [ngModel]="details?.industry_type">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor='let type of industry_type' [value]="type">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput"> Vendor Type</label>
+                <div class="col-md-4">
+                  <select class="browser-default custom-select" name="vendor_type" formControlName="vendor_type"
+                    [ngModel]="details?.vendor_type">
+                    <option selected>Open this select menu</option>
+                    <option *ngFor='let type of vendor_type' [value]="type">
+                      {{type}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">GST No.</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md"
+                    formControlName="gst" [ngModel]="details?.gst">
+                    <div *ngIf="!vendorForm2.controls['gst'].valid && vendorForm2.controls['gst'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                      *Required.
+                    </div>
+                  <div *ngIf="isTrue('GST')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">PAN</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md"
+                    formControlName="pan" [ngModel]="details?.pan">
+                    <div *ngIf="!vendorForm2.controls['pan'].valid && vendorForm2.controls['pan'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                      *Required.
+                    </div>
+                  <div *ngIf="isTrue('PAN')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label class="col-md-4 control-label" for="textinput">Aadhar Number</label>
+                  <div class="col-md-4">
+                    <input id="textinput" name="textinput" type="text" name="aadhar" class="form-control input-md"
+                      formControlName="aadhar" [ngModel]="details?.aadhar">
+                    <div *ngIf="!vendorForm2.controls['aadhar'].valid  && vendorForm2.controls['aadhar'].dirty " class="my_alert" style="margin-top: 3px; color: red">
+                      **Aadhar Not valid, Only 12 digit numbers allowed.
+                    </div>
+                    <div *ngIf="isTrue('Aadhar')" class="my_alert" style="margin-top: 3px; color: red">
+                      *Please check this field.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">ESIC No.</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" name="esic" class="form-control input-md"
+                        formControlName="esic" [ngModel]="details?.esic">
+                        <div *ngIf="!vendorForm2.controls['esic'].valid && vendorForm2.controls['esic'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *Required.
+                        </div>
+                      <div *ngIf="isTrue('ESIC')" class="my_alert" style="margin-top: 3px; color: red">
+                        *Please check this field.
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Provident Fund No.</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" name="pf" class="form-control input-md"
+                        formControlName="pf" [ngModel]="details?.pf">
+                        <div *ngIf="!vendorForm2.controls['pf'].valid && vendorForm2.controls['pf'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                          *Required.
+                        </div>
+                      <div *ngIf="isTrue('Provident')" class="my_alert" style="margin-top: 3px; color: red">
+                        *Please check this field.
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Excise Registration No. (if any)</label>
+                    <div class="col-md-4">
+                        
+                      <input id="textinput" name="textinput" type="text" name="exice" class="form-control input-md"
+                        formControlName="exice" [ngModel]="details?.exice">
+                        <div *ngIf="!vendorForm2.controls['exice'].valid && vendorForm2.controls['exice'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                            *Required.
+                          </div>
+        
+                    </div>
+                  </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">SSI Details</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md"
+                    formControlName="ssi" [ngModel]="details?.ssi">
+                    <div *ngIf="!vendorForm2.controls['ssi'].valid && vendorForm2.controls['ssi'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                        *Required.
+                      </div>
+                  <div *ngIf="isTrue('SSI')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Effective Date</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md"
+                    formControlName="effective_date" [ngModel]="details?.effective_date">
+                    <div *ngIf="!vendorForm2.controls['effective_date'].valid && vendorForm2.controls['effective_date'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                        *Required.
+                      </div>
+                  <div *ngIf="isTrue('Effective')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Bank</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md"
+                    formControlName="bank_name" [ngModel]="details?.bank_name">
+                    <div *ngIf="!vendorForm2.controls['bank_name'].valid && vendorForm2.controls['bank_name'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                        *Required.
+                      </div>
+                  <div *ngIf="isTrue('Bank')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Account Number</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md"
+                    formControlName="bank_account_number" [ngModel]="details?.bank_account_number">
+                    <div *ngIf="!vendorForm2.controls['bank_account_number'].valid && vendorForm2.controls['bank_account_number'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                        *Required.
+                      </div>
+                  <div *ngIf="isTrue('Account Number')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">IFSC</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md"
+                    formControlName="ifsc" [ngModel]="details?.ifsc">
+                    <div *ngIf="!vendorForm2.controls['ifsc'].valid && vendorForm2.controls['ifsc'].dirty" class="my_alert" style="margin-top: 3px; color: red">
+                        *Required.
+                      </div>
+                  <div *ngIf="isTrue('IFSC')" class="my_alert" style="margin-top: 3px; color: red">
+                    *Please check this field.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label class="col-md-4 control-label" for="textinput"> TDS Section Applicable</label>
+                  <div class="col-md-4">
+                    <select class="browser-default custom-select" name="tds" formControlName="tds" [ngModel]="details?.tds">
+                      <option selected>Open this select menu</option>
+                      <option value="YES">Yes </option>
+                      <option value="NO">No </option>
+                    </select>
+                  </div>
+                </div>
+
+            </div>
+            <div class="tab-pane" id="42b">
+              <div formArrayName="promoters">
+                <div *ngFor="let promoter of vendorForm2.controls.promoters.controls; let promoterIndex=index;">
+
+                  <div class="form-group" [formGroupName]="promoterIndex">
+                    <label class="col-md-4 control-label" for="textinput">Promoter</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="promoter">
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4 col-md-offset-7">
+                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addPromoter()">Add more
+                    Promoters</button>
+                </div>
+              </div>
+
+              <div formArrayName="sales">
+                <div *ngFor="let sale of vendorForm2.controls.sales.controls; let saleIndex=index;">
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                      value="{{identifier}}">
+                  </div>
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <label class="col-md-4 control-label" for="textinput">Product Supplied</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_supplied">
+                      
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <label class="col-md-4 control-label" for="textinput">Turnover</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="turnover">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="saleIndex">
+                    <label class="col-md-4 control-label" for="textinput">Percent of total sales</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="percent">
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4 col-md-offset-7">
+                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addSales()">Add more Sales</button>
+                </div>
+              </div>
+              <div formArrayName="manufacturers">
+                <div *ngFor="let maufacturer of vendorForm2.controls.manufacturers.controls; let maufacturerIndex=index;">
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <input id="textinput" name="textinput" type="hidden" class="form-control input-md" formControlName="identifier"
+                      value="{{identifier}}">
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Location</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="location">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Product Type at this manufacturer</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product_type_man">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Number of Machines</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="number_of_machines">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Monthly Production Capacity</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="monthly_production_capacity">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Technical Workers</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="technical_workers">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" [formGroupName]="maufacturerIndex">
+                    <label class="col-md-4 control-label" for="textinput">Certification</label>
+                    <div class="col-md-4">
+                      <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="certification">
+
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4 col-md-offset-7">
+                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addManufacturer()">Add more
+                    Manufacturers</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4 col-md-offset-1">
+              <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+</div>

@@ -1,118 +1,326 @@
-<hr>
-<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Basic Details</h2></div>
-<hr>
-<table  class="table table-striped" >
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Office Address</th>
-      <th>City</th>
-      <th>Pin Code</th>
-      <th>Phone</th>
-      <th>State</th>
-      <th>Establishment Year</th>
-      <th>Website</th>
-      <th>Contact Person</th>
-      <th>Email</th>
-      <th>Designation</th>
-      <th> Bank</th>
-      <th> Account Number</th>
-      <th> Branch</th>
-      <th> IFSC</th>
+<div [ngStyle]="{'display':display3}">
 
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let i of vendors;let c=index">
-      <th scope="row">{{c+1}}</th>
-      <td>{{i.vendor_name}}</td>
-      <td>{{i.office_address}}</td>
-      <td>{{i.city}}</td>
-      <td>{{i.pin_code}}</td>
-      <td>{{i.phone}}</td>
-      <td>{{i.state}}</td>
-      <td>{{i.establishment_year}}</td>
-      <td>{{i.website}}</td>
-      <td>{{i.contact_name}}</td>
-      <td>{{i.email}}</td>
-      <td>{{i.designation}}</td>
-      <td>{{i.contact_phone}}</td>
-      <td>{{i.bank_name}}</td>
-      <td>{{i.bank_account_number}}</td>
-      <td>{{i.bank_branch}}</td>
-      <td>{{i.ifsc}}</td>
-    </tr>
-  </tbody>
-</table>
 
-<hr><hr size="30">
-<div class="ui horizontal divider"></div>
-<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Sales</h2></div>
-<hr>
-<table class="ui celled table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Products</th>
-      <th>Turnover</th>
-      <th>Business Percentage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let i of sales;let c=index">
-      <th scope="row">{{c+1}}</th>
-      <td>{{i.products}}</td>
-      <td>{{i.turnover}}</td>
-      <td>{{i.business_percentage}}</td>
-    </tr>
-  </tbody>
-</table>
-<hr><hr size=30>
-<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Manufacturers</h2></div>
-<hr>
-<table class="ui celled table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Location</th>
-      <th>Product Type</th>
-      <th>Number of Machines</th>
-      <th>Monthly Production Capacity</th>
-      <th>Technical Workers</th>
-      <th>Certifications</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let i of manufacturers;let c=index">
-      <th scope="row">{{c+1}}</th>
-      <td>{{i.location}}</td>
-      <td>{{i.product_type}}</td>
-      <td>{{i.num_of_machines}}</td>
-      <td>{{i.monthly_production_capacity}}</td>
-      <td>{{i.technical_workers}}</td>
-      <td>{{i.certifications}}</td>
-    </tr>
-  </tbody>
-</table>
-<hr><hr size=30>
-<div style= "margin-left: 2%;" class = "ui blue basic label"><h2> Promoters</h2></div>
-<hr>
-<table class="ui celled table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Promoter</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let i of promoters;let c=index">
-      <th scope="row">{{c+1}}</th>
-      <td>{{i.promoter}}</td>
-    </tr>
-  </tbody>
-</table>
-<hr>
+  <div class="modal-dialog" role="document">
 
-<button style="position:relative; left: 48%;" id="singlebutton" type = "button" class="btn center btn-primary" >Verify Vendor</button>
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Reasons why Level 3 resent this form:</h4>
+      </div>
+      {{message}}
+
+      <div class="modal-footer">
+
+
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="data">
+
+
+  <hr>
+  <div style="margin-left: 2%;" class="ui blue basic label">
+    <h2> Basic Details</h2>
+  </div>
+  <hr>
+  
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+       
+        <th>Name</th>
+        <th>Office Address</th>
+        <th>City</th>
+        <th>Pin Code</th>
+        <th>Phone</th>
+        <th>State</th>
+        <th>Establishment Year</th>
+        <th>Website</th>
+        <th>Contact Person</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>Contact Phone</th>
+        <th> Bank</th>
+        <th> Account Number</th>
+        <th> Branch</th>
+        <th> IFSC</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td>{{vendors.vendor_name}}</td>
+        <td>{{vendors.office_address}}</td>
+        <td>{{vendors.city}}</td>
+        <td>{{vendors.pin_code}}</td>
+        <td>{{vendors.phone}}</td>
+        <td>{{vendors.state}}</td>
+        <td>{{vendors.establishment_year}}</td>
+        <td>{{vendors.website}}</td>
+        <td>{{vendors.contact_name}}</td>
+        <td>{{vendors.email}}</td>
+        <td>{{vendors.designation}}</td>
+        <td>{{vendors.contact_phone}}</td>
+        <td>{{vendors.bank_name}}</td>
+        <td>{{vendors.bank_account_number}}</td>
+        <td>{{vendors.bank_branch}}</td>
+        <td>{{vendors.ifsc}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <div style="margin-left: 2%;" class="ui blue basic label">
+    <h2> Documents</h2>
+  </div>
+  <hr>
+  
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+       
+        <th>Aadhar Copy</th>
+        <th>PAN Copy</th>
+        <th>Address Proof</th>
+        <th>Cancelled Cheque</th>
+        <th>Environment Certification</th>
+        <th>Pf File</th>
+        <th>ESIC Copy</th>
+        <th>Excise Copy</th>
+        <th>ISO certifications</th>
+        <!-- <th>Contact Person</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>Contact Phone</th>
+        <th> Bank</th>
+        <th> Account Number</th>
+        <th> Branch</th>
+        <th> IFSC</th> -->
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td>{{vendors.vendor_name}}</td>
+        <td>{{vendors.office_address}}</td>
+        <td>{{vendors.city}}</td>
+        <td>{{vendors.pin_code}}</td>
+        <td>{{vendors.phone}}</td>
+        <td>{{vendors.state}}</td>
+        <td>{{vendors.establishment_year}}</td>
+        <td>{{vendors.website}}</td>
+        <td>{{vendors.contact_name}}</td>
+        <!-- <td>{{vendors.email}}</td>
+        <td>{{vendors.designation}}</td>
+        <td>{{vendors.contact_phone}}</td>
+        <td>{{vendors.bank_name}}</td>
+        <td>{{vendors.bank_account_number}}</td>
+        <td>{{vendors.bank_branch}}</td>
+        <td>{{vendors.ifsc}}</td> -->
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <hr>
+  <hr size="30">
+  <div class="ui horizontal divider"></div>
+  <div style="margin-left: 2%;" class="ui blue basic label">
+    <h2> Sales</h2>
+  </div>
+  <hr>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Products</th>
+        <th>Turnover</th>
+        <th>Business Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of sales;let c=index">
+        <th scope="row">{{c+1}}</th>
+        <td>{{i.products}}</td>
+        <td>{{i.turnover}}</td>
+        <td>{{i.business_percentage}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <hr size=30>
+  <div style="margin-left: 2%;" class="ui blue basic label">
+    <h2> Manufacturers</h2>
+  </div>
+  <hr>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Location</th>
+        <th>Product Type</th>
+        <th>Number of Machines</th>
+        <th>Monthly Production Capacity</th>
+        <th>Technical Workers</th>
+        <th>Certifications</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of manufacturers;let c=index">
+        <th scope="row">{{c+1}}</th>
+        <td>{{i.location}}</td>
+        <td>{{i.product_type}}</td>
+        <td>{{i.num_of_machines}}</td>
+        <td>{{i.monthly_production_capacity}}</td>
+        <td>{{i.technical_workers}}</td>
+        <td>{{i.certifications}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <hr size=30>
+  <div style="margin-left: 2%;" class="ui blue basic label">
+    <h2> Promoters</h2>
+  </div>
+  <hr>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Promoter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of promoters;let c=index">
+        <th scope="row">{{c+1}}</th>
+        <td>{{i.promoter}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <button *ngIf="showButton() && !isDecline" style="position:relative; left: 25%;" id="singlebutton" type="button"
+    class="btn center btn-primary" (click)="verify()">Verify Vendor</button>
+  <button *ngIf="showButton() && isDecline" style="position:relative; left: 25%;" id="singlebutton" type="button" class="btn center btn-primary"
+    (click)="isVerified()">Verify Vendor</button>
+  <button style="position:relative ;background-color:red; left: 60%;" id="singlebutton" type="button" class="btn center btn-primary"
+    *ngIf="showButton()" (click)="decline()">Decline Vendor</button>
+
+    <button style="position:relative ;background-color:red; left: 80%;" id="singlebutton" type="button" class="btn center btn-primary"
+    *ngIf="showReportSubmission()" (click)="openModal3()">Fill Report</button>
+    
+    
+  <!-- <button style="position:relative ;background-color:red; left: 40%;" id="singlebutton" type="button" class="btn center btn-primary"
+    *ngIf="isAdmin" (click)="edit()">Edit Details</button> -->
+
+</div>
+<!-- <div class="ui modal" [ngStyle]="{'display':display}"></div> -->
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+
+
+  <div class="modal-dialog" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Model Title</h4>
+      </div>
+      <form class="ui form" #declineForm="ngForm" (ngSubmit)="submit()">
+        <div class="form-group">
+          <div class="row">
+            <div *ngFor='let field of fields' class="col-md-3">
+              <label class="checkbox-inline"> <input name="fields" type="checkbox" [value]="field" [(ngModel)]="field.checked" />
+                {{field.name}}</label>
+            </div>
+          </div>
+
+
+        </div>
+        <div class=form-group>
+          <h4> Please explain why are you rejecting the form</h4>
+          <textarea name="text" [(ngModel)]="declineReason"> </textarea>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+
+        <button type="button" style="background-color: green;" class="btn btn-default" (click)="submit()">Submit</button>
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display2}">
+
+
+  <div class="modal-dialog" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Please Explain why are you verifying the form.</h4>
+      </div>
+      <form class="ui form" #verificationForm="ngForm" (ngSubmit)="submitVerification()">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <textarea name="text" [(ngModel)]="text"> </textarea>
+            </div>
+          </div>
+
+
+        </div>
+      </form>
+
+      <div class="modal-footer">
+
+       
+        <button type="button" style="background-color: green;" class="btn btn-default" (click)="submitVerification()">Submit</button>
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}">
+
+
+  <div class="modal-dialog" role="document">
+
+
+    <div class="modal-content">
+        <label style="text-align: right;" class="control-label">Please submit the report</label>
+        <br>
+        <input placeholder="Aadhar Copy"  name="report" type="file"
+          (change)="onFileChange($event)" class="inputfile" #cancelled_cheque>
+
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" (click)="upload()">Upload</button>
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

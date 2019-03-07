@@ -1,0 +1,20 @@
+<table  class="table table-striped" >
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Company</th>
+      <th>Department</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of users;let c=index">
+      <th scope="row">{{c+1}}</th>
+      <td>{{i.username}}</td>
+      <td>{{i.level}}</td>
+      <td >{{i.cname}}</td>
+      <td >{{i.dname}}</td>
+    </tr>
+  </tbody>
+</table>
