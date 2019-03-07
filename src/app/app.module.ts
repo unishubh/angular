@@ -27,6 +27,18 @@ import {LoginService} from './services/login.service';
 import { VendorFormComponent } from './views/vendor-form/vendor-form.component';
 import { VendorListComponent } from './vendor-list/vendor-list.component';
 import { VendorDetailsComponent } from './views/vendor-details/vendor-details.component';
+import {InhousevendorsComponent} from './views/inhousevendors/inhousevendors.component';
+import { ListCoComponent } from './views/list-co/list-co.component';
+import { HistoryComponent } from './views/history/history.component';
+import { FormChecksService } from './services/form-checks.service';
+import { FormComponent } from './views/form/form.component';
+import { UserlistComponent } from './views/userlist/userlist.component';
+import { CompanyContactComponent } from './views/forms/company-contact/company-contact.component';
+import { FormDataService } from './services/form-data.service';
+import { CompanyDetailsComponent } from './views/forms/company-details/company-details.component';
+import { ContactComponent } from './views/forms/contact/contact.component';
+import { OthersComponent } from './views/forms/others/others.component';
+import { FilesComponent } from './views/forms/files/files.component';
 
 
 @NgModule({
@@ -44,6 +56,17 @@ import { VendorDetailsComponent } from './views/vendor-details/vendor-details.co
     VendorFormComponent,
     VendorListComponent,
     VendorDetailsComponent,
+    InhousevendorsComponent,
+    ListCoComponent,
+    HistoryComponent,
+    FormComponent,
+    UserlistComponent,
+    CompanyContactComponent,
+    CompanyDetailsComponent,
+    ContactComponent,
+    OthersComponent,
+    FilesComponent,
+   
   
   ],
   imports: [
@@ -57,6 +80,8 @@ import { VendorDetailsComponent } from './views/vendor-details/vendor-details.co
   providers: [ 
     CheckGuard,
     LoginService,
+    FormChecksService,
+    FormDataService,
    ],
   bootstrap: [AppComponent]
 })

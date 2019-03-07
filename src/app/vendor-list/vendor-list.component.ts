@@ -16,10 +16,14 @@ export class VendorListComponent implements OnInit {
   ngOnInit() {
 
     this.level = +localStorage.getItem('level');
+    let token = localStorage.getItem('token');
     var headers = new Headers();
+    headers.append('Authorization', `Bearer ${token}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.http.get(this._url + '/' + this.level, { headers: headers })
+    let content = new URLSearchParams();
+    content.set('level', String(this.level));
+    this.http.post(this._url ,content.toString(), { headers: headers })
     .subscribe(
       (response : Response)=> {
         console.log(response.json());

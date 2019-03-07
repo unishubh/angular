@@ -1,107 +1,308 @@
+<style>
+   select {
+    width: 100%;
+  }
+    input {
+      background-color: gainsboro;
+      border-radius: 10px 10px 10px 10px;
+    }
+    select {
+      background-color: gainsboro;
+    }
+    </style>
+
 <section class="content-header">
-  <h1>
-    Add a new User
-  </h1>
-  
+
 </section>
 <!-- Main content -->
 <section class="content">
 
 
-  <div class="container">
-  <form class="form-horizontal" [formGroup] = "userForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-  
-  <!-- Form Name -->
-  <!-- <div class="form-group">
+  <div class="ui raised very padded text container segment">
+
+
+    <h3> Add a new User</h3>
+
+
+
+    <br>
+
+    <form class="form-horizontal" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+
+        <!-- Form Name -->
+        <!-- <div class="form-group">
   <label class="col-md-4 control-label" for="textinput"><h3>Education System</h3></label> 
   </div> -->
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Username</label>  
-    <div class="col-md-4">
-    <input id="textinput" name="textinput" type="text"  class="form-control input-md" name = "username" formControlName="username" >
-      
-    </div>
-  </div> 
-  
-  
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Password</label>  
-    <div class="col-md-4">
-    <input id="textinput" name="textinput" type="text" name="password" class="form-control input-md" formControlName="password" >
-      
-    </div>
-  </div> 
-  <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Phone</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md" formControlName="phone" >
-        
-      </div>
-    </div> 
- 
-  <div class="form-group">
+
+        <!-- Text input-->
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="text" class="form-control input-md" name="username"
+              formControlName="username" placeholder="Username">
+            <div *ngIf="!userForm.controls['username'].valid" class="my_alert" style="margin-top: 3px; color: red">*Username
+              Not valid, can only contain numbers</div>
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="password" name="password" class="form-control input-md"
+              formControlName="password" placeholder="Password">
+            <div *ngIf="!userForm.controls['password'].valid" class="my_alert" style="margin-top: 3px; color: red">
+              *Password invalid, atleast 8 chars
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="form-row">
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="number" name="phone" class="form-control input-md"
+              formControlName="phone" placeholder="Phone Number">
+            <div *ngIf="!userForm.controls['phone'].valid" class="my_alert" style="margin-top: 3px; color: red">*Phone
+              Not valid</div>
+          </div>
+          <div class="col-md-6">
+            <input id="textinput" name="textinput" type="email" name="email" class="form-control input-md"
+              formControlName="email" placeholder="Email">
+            <div *ngIf="!userForm.controls['email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+              *Email Not valid
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="form-row">
+          <div class="col-md-6">
+            <label style="text-align: right;" class="control-label" for="textinput">Levels</label>
+            <div class="col-md-10">
+              <select class="form-control input-md" name="level" [(ngModel)]="level" formControlName="level">
+
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label style="text-align: right;" class="control-label" for="textinput">Roles</label>
+            <div class="col-md-10">
+              <select class="form-control input-md" name="role" formControlName="role">
+                <option selected="selected">Role</option>
+                <option value="Non-Admin">Non-Admin</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label style="text-align: right;" class="control-label" for="textinput">Comp.</label>
+            <div class="col-md-10">
+              <select class="form-control input-md" name="company" formControlName="company">
+                <option *ngFor='let company of companies' [value]="company">
+                  {{company}}
+                </option>
+              </select>
+              <div *ngIf="!userForm.controls['company'].valid" class="my_alert" style="margin-top: 3px; color: red">*Compnay
+                Not valid</div>
+
+            </div>
+          </div>
+          <div *ngIf="showDep()" class="col-md-6">
+            <label style="text-align: right;" class=" control-label" for="textinput">Cat.</label>
+            <div class="col-md-10">
+              <select class="form-control input-md" name="department" formControlName="department">
+                <option *ngFor='let department of departments' [value]="department">
+                  {{department}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="form-row">
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="number" name="phone" class="form-control input-md"
+              formControlName="phone" placeholder="Phone Number">
+          </div>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="email" name="email" class="form-control input-md"
+              formControlName="email" placeholder="Email">
+          </div>
+        </div> -->
+        <br>
+        <!-- <div class="form-row">
+          <div class="col-md-4">
+            
+            
+            <input type="text" placeholder="place" />
+              <select class="browser-default custom-select" name="level" [(ngModel)]="level" formControlName="level">
+                <option selected>Open this select menu</option>
+                <option value="0">NA</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            
+          </div>
+          <div class="col-md-4">
+           <input type="text" placeholder="pl" />
+              <select class="browser-default custom-select" name="role" formControlName="role">
+                  <option selected>Open this select menu</option>
+                  <option value="Non-Admin">Non-Admin</option>
+                  <option value="Admin">Admin</option>
+                </select>
+            
+          </div>
+        </div> -->
+        <br>
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Username</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" class="form-control input-md" name="username"
+              formControlName="username">
+            <div *ngIf="!userForm.controls['username'].valid" class="my_alert" style="margin-top: 3px; color: red">*Username
+              Not valid, can only contain numbers</div>
+
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Password</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" name="password" class="form-control input-md"
+              formControlName="password">
+            <div *ngIf="!userForm.controls['password'].valid" class="my_alert" style="margin-top: 3px; color: red">
+              *Password invalid, atleast 8 chars
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Phone</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" name="phone" class="form-control input-md"
+              formControlName="phone">
+            <div *ngIf="!userForm.controls['phone'].valid" class="my_alert" style="margin-top: 3px; color: red">*Phone
+              Not valid</div>
+
+          </div>
+        </div> -->
+
+        <!-- <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">Company</label>  
       <div class="col-md-4">
       <input id="textinput" name="textinput" type="text" name="company" class="form-control input-md" formControlName="company" >
+      <div *ngIf="!userForm.controls['company'].valid" class="my_alert" style="margin-top: 3px; color: red">*Compnay Not valid</div>
         
       </div>
-    </div> 
+    </div>  -->
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Level</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="level" [(ngModel)]="level" formControlName="level">
+              <option selected>Open this select menu</option>
+              <option value="0">NA</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+            <div *ngIf="!userForm.controls['level'].valid" class="my_alert" style="margin-top: 3px; color: red">*Level
+              Not valid</div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Role</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="role" formControlName="role">
+              <option selected>Open this select menu</option>
+              <option value="Non-Admin">Non-Admin</option>
+              <option value="Admin">Admin</option>
+            </select>
+
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Company</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="company" formControlName="company">
+              <option *ngFor='let company of companies' [value]="company">
+                {{company}}
+              </option>
+            </select>
+            <div *ngIf="!userForm.controls['company'].valid" class="my_alert" style="margin-top: 3px; color: red">*Compnay
+              Not valid</div>
+
+          </div>
+        </div> -->
+
+        <!-- <div *ngIf="showDep()" class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Department</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="department" formControlName="department">
+              <option *ngFor='let department of departments' [value]="department">
+                {{department}}
+              </option>
+            </select>
+            <div *ngIf="!userForm.controls['department'].valid" class="my_alert" style="margin-top: 3px; color: red">*Department
+              Not valid</div>
+
+          </div>
+        </div> -->
+        <!-- 
     <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Department</label>  
         <div class="col-md-4">
         <input id="textinput" name="textinput" type="text"  name="department" class="form-control input-md" formControlName="department" >
+        <div *ngIf="!userForm.controls['department'].valid" class="my_alert" style="margin-top: 3px; color: red">*Department Not valid</div>
           
         </div>
-      </div> 
-    
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Email</label>  
-        <div class="col-md-4">
-        <input id="textinput" name="textinput" type="text"  name="email" class="form-control input-md" formControlName="email" >
-          
-        </div>
-      </div> 
+      </div>  -->
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Level</label>  
-        <div class="col-md-4">
-          <select class="browser-default custom-select" name="level" formControlName="level"  >
-            <option selected>Open this select menu</option>
-            <option value="0">NA</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-          
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Role</label>  
-        <div class="col-md-4">
-          <select class="browser-default custom-select" name="role" formControlName="role"  >
-            <option selected>Open this select menu</option>
-            <option value="Non-Admin">Non-Admin</option>
-            <option value="Admin">Admin</option>
-          </select>
-          
-        </div>
-      </div>
-    
-  <hr>
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Email</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" name="email" class="form-control input-md"
+              formControlName="email">
+            <div *ngIf="!userForm.controls['email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+              *Email Not valid
+            </div>
 
-  <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4 col-md-offset-1">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-      </div>
-    </div> 
-  </fieldset>
-  </form>
-  
+          </div>
+        </div> -->
+
+        <br>
+        <br>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="singlebutton"></label>
+          <div class="col-md-4 col-md-offset-1">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
   </div>
-  
-  </section>
+
+</section>

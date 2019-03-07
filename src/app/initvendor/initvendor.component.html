@@ -1,168 +1,409 @@
+<style>
+input {
+  background-color: gainsboro;
+  border-radius: 10px 10px 10px 10px;
+}
+select {
+  background-color: gainsboro;
+}
+</style>
+
 <section class="content-header">
-  <h1>
-    Add a new Vendor
-  </h1>
   
+
 </section>
 <!-- Main content -->
 <section class="content">
 
 
-  <div class="container">
-  <form class="form-horizontal" [formGroup] = "vendorForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-  
-  <!-- Form Name -->
-  <!-- <div class="form-group">
-  <label class="col-md-4 control-label" for="textinput"><h3>Education System</h3></label> 
-  </div> -->
-  
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput"> Business Entity</label>  
-    <div class="col-md-4">
-    <!-- <input id="textinput" name="company" type="text" placeholder="" class="form-control input-md" ngModel> -->
-    <select class="browser-default custom-select" name="company" formControlName="company" >
-      <option selected>Open this select menu</option>
-      <option value="FEL">FEL</option>
-      <option value="CT">CT</option>
-      <option value="FLFL Brands">FLFL Brands</option>
-      <option value="LC">LC</option>
-      <option value="ALL">ALL</option>
-      <option value="GIOVANI">GIOVANI</option>
-    </select>
-    </div>
-  </div> 
-  <hr><hr size="30">
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">LOB</label>  
-    <div class="col-md-4">
-    <input id="textinput" name="textinput" type="text" value="Fashion" class="form-control input-md" name = "lob" formControlName="lob" >
-      
-    </div>
-  </div> 
-  
-  
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Category</label>  
-    <div class="col-md-4">
-    <input id="textinput" name="textinput" type="text" name="category" class="form-control input-md" formControlName="category" >
-      
-    </div>
-  </div> 
-  <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Product Type</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="product_type" class="form-control input-md" formControlName="product_type" >
+  <div class="ui raised very padded text container segment">
+      <h3>
+          Add a new Vendor
+        </h3>
+        <br>
+        <br>
+    <form class="form-horizontal" [formGroup]="vendorForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+
+          <div class="form-row">
+              <div class="col-md-6">
+                  <input id="textinput" name="textinput" type="email" name="vendor_email" class="form-control input-md"
+                  formControlName="vendor_email" placeholder="Email">
+                  <div *ngIf="!vendorForm.controls['vendor_email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+                      *Email Not valid
+                    </div>
+              </div>
+              <div class="col-md-6">
+                  <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md"
+                  formControlName="country" placeholder="Country">
+              </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+          <div class="form-row">
+              <div class="col-md-6">
+                <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput"> Business Entity</label>
+              <div class="col-md-10">
+                  <select class="form-control input-md" name="company" formControlName="company">
+                      <option selected>Open this select menu</option>
+                      <option value="FEL">FEL</option>
+                      <option value="CT">CT</option>
+                      <option value="FLFL Brands">FLFL Brands</option>
+                      <option value="LC">LC</option>
+                      <option value="ALL">ALL</option>
+                      <option value="GIOVANI">GIOVANI</option>
+                    </select>
+                    
+              </div>
+              </div>
+              <div class="col-md-6">
+                  <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">LOB</label>
+                  <div class="col-md-10" >
+                      <select class="form-control input-md" name="lob" formControlName="lob">
+                          <option *ngFor='let lob of lobs' [value]="lob">
+                            {{lob}}
+                          </option>
+                        </select>
+                    </div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="form-row">
+                <div class="col-md-6">
+                  <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Category</label>
+                <div class="col-md-10">
+                    <select class="form-control input-md" name="category" formControlName="category">
+                        <option *ngFor='let category of categories' [value]="category">
+                          {{category}}
+                        </option>
+                      </select>
+                      
+                </div>
+                </div>
+                <div class="col-md-6">
+                    <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Prod. Type</label>
+                    <div class="col-md-10" >
+                        <select class="form-control input-md" name="product_type" formControlName="product_type">
+                            <option *ngFor='let product_type of product_types' [value]="product_type">
+                              {{product_type}}
+                            </option>
+                          </select>
+                      </div>
+                </div>
+              </div>
+              <br>
+            <br>
+            <br>
+            <br>
+
+              <div class="form-row">
+                  <div class="col-md-6">
+                    <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Type</label>
+                  <div class="col-md-10">
+                      <select class="form-control input-md" name="type" formControlName="type">
+                          <option value="domestic">Domestic</option>
+                          <option value="import">import</option>
+                        </select>
+                        
+                  </div>
+                  </div>
+                  <div class="col-md-6">
+                      <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Payment Term</label>
+                      <div class="col-md-10" >
+                          <select class="form-control input-mdt" name="payment_term" formControlName="payment_term">
+                              <option value="10">10 days</option>
+                              <option value="15">15 days</option>
+                              <option value="21">21 days</option>
+                              <option value="30">30 days</option>
+                              <option value="45">45 days</option>
+                              <option value="60">60 days</option>
+                              <option value="90">90 days</option>
+                              <option value="120">120 days</option>
+                              <option value="against lc">Against LC</option>
+                              <option value="immediate">Immediate</option>
+                            </select>
+                        </div>
+                  </div>
+                </div>
+              
+                <br>
+            <br>
+            <br>
+            <br>
+                <div class="form-row">
+                    <div class="col-md-6">
+                     
+                   
+                        <input id="textinput" name="textinput" type="text" value="Outright" name="buying_mode" class="form-control input-md"
+                        formControlName="buying_mode" placeholder="Buying Mode">
+                          
+                   
+                    </div>
+                    <div class="col-md-6">
+                        <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Incoterms</label>
+                        <div class="col-md-10" >
+                            <select class="form-control input-mdt" name="incoterm" formControlName="incoterm">
+                                <option value="DDP">DDP</option>
+                                <option value="DDU">DDU</option>
+                                <option value="FOB">FOB</option>
+                                <option value="EXW">EXW</option>
+                              </select>
+                          </div>
+                    </div>
+                  </div>
+                  <br>
+            <br>
+            <br>
+            <br>
+                  <div class = "form-row">
+                    <div class="col-md-6">
+                      <input id="textinput" name="textinput" type="text" name="name" class="form-control input-md"
+                        formControlName="name" placeholder="Company Name">
+          
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  
+                  <div class="form-row">
+                      <div class="col-md-8">
+                       
+                        <div *ngFor="let product of vendorForm.controls.products.controls; let vendorIndex=index;">
+                            <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product" placeholder="Products">
+                            <br>
+                        </div>
+                          
+                            
+                     
+                      </div>
+                      <div class="col-md-4">
+                          <button id="singlebutton" type="button" class="btn btn-primary" (click)="addProduct()">Add more Products</button>
+                      </div>
+                    </div>
+
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput"> Business Entity</label>
+          <div class="col-md-4">
+           
+            <select class="browser-default custom-select" name="company" formControlName="company">
+              <option selected>Open this select menu</option>
+              <option value="FEL">FEL</option>
+              <option value="CT">CT</option>
+              <option value="FLFL Brands">FLFL Brands</option>
+              <option value="LC">LC</option>
+              <option value="ALL">ALL</option>
+              <option value="GIOVANI">GIOVANI</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <hr size="30">
+       
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">LOB</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="lob" formControlName="lob">
+              <option *ngFor='let lob of lobs' [value]="lob">
+                {{lob}}
+              </option>
+            </select>
+
+          </div>
+        </div> -->
+
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Category</label>
+          <div class="col-md-4">
+
+            <select class="browser-default custom-select" name="category" formControlName="category">
+              <option *ngFor='let category of categories' [value]="category">
+                {{category}}
+              </option>
+            </select>
+
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Company Email</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" name="vendor_email" class="form-control input-md"
+              formControlName="vendor_email">
+
+            <div *ngIf="!vendorForm.controls['vendor_email'].valid" class="my_alert" style="margin-top: 3px; color: red">
+              *Email Not valid
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Product Type</label>
+          <div class="col-md-4">
+
+            <select class="browser-default custom-select" name="product_type" formControlName="product_type">
+              <option *ngFor='let product_type of product_types' [value]="product_type">
+                {{product_type}}
+              </option>
+            </select>
+          </div>
+        </div> -->
+
+        <!-- <div formArrayName="products">
+          <div *ngFor="let product of vendorForm.controls.products.controls; let vendorIndex=index;">
+            <div class="form-group" [formGroupName]="vendorIndex">
+              <label class="col-md-4 control-label" for="textinput">Product</label>
+              <div class="col-md-4">
+                <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="singlebutton"></label>
+          <div class="col-md-4 col-md-offset-7">
+            <button id="singlebutton" type="button" class="btn btn-primary" (click)="addProduct()">Add more Products</button>
+          </div>
+        </div> -->
+
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Type</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="type" formControlName="type">
+              <option value="domestic">Domestic</option>
+              <option value="import">import</option>
+            </select>
+
+          </div>
+        </div> -->
+        <br>
+        <hr size="30">
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Country</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md"
+              formControlName="country">
+
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Buying Mode</label>
+          <div class="col-md-4">
+            <input id="textinput" name="textinput" type="text" value="Outright" name="buying_mode" class="form-control input-md"
+              formControlName="buying_mode">
+
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Payment Term</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="payment_term" formControlName="payment_term">
+              <option value="10">10 days</option>
+              <option value="15">15 days</option>
+              <option value="21">21 days</option>
+              <option value="30">30 days</option>
+              <option value="45">45 days</option>
+              <option value="60">60 days</option>
+              <option value="90">90 days</option>
+              <option value="120">120 days</option>
+              <option value="against lc">Against LC</option>
+              <option value="immediate">Immediate</option>
+            </select>
+
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Incoterms</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="incoterm" formControlName="incoterm">
+              <option value="DDP">DDP</option>
+              <option value="DDU">DDU</option>
+              <option value="FOB">FOB</option>
+              <option value="EXW">EXW</option>
+            </select>
+
+          </div>
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">Form Allocated</label>
+          <div class="col-md-4">
+            <select class="browser-default custom-select" name="form_allocated" formControlName="form_allocated">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+        </div> -->
+
+
+        <br>
+
+        <div [ngStyle]="{'display':display3}">
+
+
+          <div class="modal-dialog" role="document">
         
-      </div>
-    </div> 
-  
-    <div formArrayName = "products">
-      <div *ngFor= "let product of vendorForm.controls.products.controls; let vendorIndex=index;"  >
-         <div class="form-group" [formGroupName] = "vendorIndex"  >
-             <label class="col-md-4 control-label" for="textinput">Product</label>  
-             <div class="col-md-4">
-             <input id="textinput" name="textinput" type="text"  class="form-control input-md"  formControlName="product" >
-               
-             </div>
-           </div> 
-      </div>
-    
-    </div> 
-
-    <div class="form-group">
-     <label class="col-md-4 control-label" for="singlebutton"></label>
-     <div class="col-md-4 col-md-offset-7">
-       <button id="singlebutton"  type = "button" class="btn btn-primary" (click)= "addProduct()">Add more Products</button>
-     </div>
-   </div> 
-     
-
-    <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Type</label>  
-        <div class="col-md-4">
-          <select class="browser-default custom-select" name="type" formControlName="type"  >
-            <option selected>Open this select menu</option>
-            <option value="domestic">Domestic</option>
-            <option value="import">import</option>
-          </select>
-          
-        </div>
-      </div> 
-  <hr><hr size="30">
-  <div class="form-group">
-      <label class="col-md-4 control-label" for="textinput">Country</label>  
-      <div class="col-md-4">
-      <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md" formControlName="country" >
         
-      </div>
-    </div> 
-    <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Buying Mode</label>  
-        <div class="col-md-4">
-        <input id="textinput" name="textinput" type="text" value="Outright" name="buying_mode" class="form-control input-md" formControlName="buying_mode" >
-          
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Do you want to omit any level?</h4>
+              </div>
+              <form class="ui form" #declineForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <div class="row">
+                    <div *ngFor='let level of omitLevels' class="col-md-3" style = "margin-left: 5%">
+                      <label class="checkbox-inline"> <input name="omitLevel" type="checkbox" [value]="level.level" [(ngModel)]="level.checked" />
+                        {{level.level}}</label>
+                    </div>
+                  </div>
+        
+        
+                </div>
+              </form>
+        
+              <div class="modal-footer">
+        
+        
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div> 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Payment Term</label>  
-        <div class="col-md-4">
-          <select class="browser-default custom-select" name="payment_term" formControlName="payment_term"  >
-            <option selected>Open this select menu</option>
-            <option value="10">10 days</option>
-            <option value="15">15 days</option>
-            <option value="21">21 days</option>
-            <option value="30">30 days</option>
-            <option value="45">45 days</option>
-            <option value="60">60 days</option>
-            <option value="90">90 days</option>
-            <option value="120">120 days</option>
-            <option value="against lc">Against LC</option>
-            <option value="immediate">Immediate</option>
-          </select>
-          
-        </div>
-      </div> 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Incoterms</label>  
-        <div class="col-md-4">
-          <select class="browser-default custom-select" name="incoterm" formControlName="incoterm"  >
-            <option selected>Open this select menu</option>
-            <option value="DDP">DDP</option>
-            <option value="DDU">DDU</option>
-            <option value="FOB">FOB</option>
-            <option value="EXW">EXW</option>
-          </select>
-          
-        </div>
-      </div> 
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">Form Allocated</label>  
-        <div class="col-md-4">
-        <!-- <input id="textinput" name="company" type="text" placeholder="" class="form-control input-md" ngModel> -->
-        <select class="browser-default custom-select" name="form_allocated" formControlName="form_allocated" >
-          <option selected>Open this select menu</option>
-          <option value="1">1</option>
-          <option value="2">1</option>
-        </select>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="singlebutton"></label>
+          <div class="col-md-4 col-md-offset-1">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary" >Submit</button>
+          </div>
         </div>
-      </div> 
+        
+      </fieldset>
+    </form>
 
-    
-  <hr>
-
-  <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton"></label>
-      <div class="col-md-4 col-md-offset-1">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
-      </div>
-    </div> 
-  </fieldset>
-  </form>
-  
   </div>
+
+
   
-  </section>
+
+
+
+
+
+</section>

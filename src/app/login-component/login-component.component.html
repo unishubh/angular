@@ -10,17 +10,15 @@
 				<div class="field">
 				  <label for="inputEmail3" >Username</label>
 				  <input type="text" id="inputEmail3" #emailref="ngModel"  required name="username" ngModel>
-				  <div *ngIf="nameerror" class="alert alert-danger" style="margin-top: 3px;">
+				  <!-- <div *ngIf="nameerror" class="alert alert-danger" style="margin-top: 3px;">
 				  	Enter a valid username.
-				  </div>
+				  </div> -->
 
 				</div>
 				<div class="field">
 						<label for="inputPassword3" >Password</label>
 				  <input type="password" #passref="ngModel" required  name="password" ngModel>
-				  <div *ngIf="passworderror" class="alert alert-danger" style="margin-top: 3px;">
-				  	Password must be greater than 5 characters.
-				  </div>
+
 
 				</div>
 				<button [disabled]="!loginForm.valid" class="ui primary labeled icon button" *ngIf="!dis">
@@ -30,11 +28,6 @@
 				 <button  *ngIf="dis" class="ui primary disabled loading button">Loading</button>
 			  </form>
 			  &nbsp;
-			  <div class="field">
-					Not Registered? <a [routerLink]="['/register']">Register here</a>
-					<div class="pull-right">Forgot Password? <a [routerLink]="['/forgot']">Reset</a></div>
-
-			  </div>
 
 			  </div>
 			</div>

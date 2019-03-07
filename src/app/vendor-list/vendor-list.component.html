@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Identifier</th>
+      <th>Name</th>
       <th>Business Type</th>
       <th>LOB</th>
       <th>Category</th>
@@ -21,7 +21,7 @@
   <tbody>
     <tr *ngFor="let i of vendors;let c=index">
       <th scope="row">{{c+1}}</th>
-      <td>{{i.identifier}}</td>
+      <td>{{i.name}}</td>
       <td>{{i.business_type}}</td>
       <td>{{i.lob}}</td>
       <td>{{i.category}}</td>
@@ -30,7 +30,7 @@
       <td>{{i.country}}</td>
       <td>{{i.payment_term}}</td>
       <td>{{i.incoterms}}</td>
-      <td>{{i.initiated_by}}</td>
+      <td>{{i.username}}</td>
       <td>{{i.form_allocated}}</td>
       <td> <a a [routerLink]="['/starter/vendorDetails', i.identifier]"><button class="btn btn-primary">View Details</button></a></td>
     </tr>
