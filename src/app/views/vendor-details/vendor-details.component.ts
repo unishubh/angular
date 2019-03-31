@@ -17,6 +17,7 @@ export class VendorDetailsComponent implements OnInit {
   public sales: any[] = [];
   public promoters: any[] = [];
   public manufacturers: any[] = [];
+  public file: any[] =[];
   public id: String;
   public token: String;
   public level: Number;
@@ -30,15 +31,19 @@ export class VendorDetailsComponent implements OnInit {
   public data : boolean = true;
   public text: String ;
   public display3 : String;
+  public display4: String;
   public message : String;
   public declineReason : String;
   public reportSubmitted : Boolean = false;
+  public branches: any[] = [];
+  public declarations: any[] = [];
   public fd = new FormData();
   ngOnInit() {
     this.isDisplay = false;
     this.display = 'none';
     this.display2 = 'none';
     this.display3 = 'none';
+    this.display4 = 'none';
     this.isAdmin = false;
     this.level = +localStorage.getItem('level');
     if (this.level == 0)
@@ -102,6 +107,10 @@ export class VendorDetailsComponent implements OnInit {
               this.sales = resp.salesData;
               this.manufacturers = resp.manufacturersData;
               this.promoters = resp.promotersData;
+              this.file = resp.files;
+              this.branches = resp.branchData;
+              //this.declarations = resp.declarations;
+
 
             }
           );
@@ -156,6 +165,10 @@ export class VendorDetailsComponent implements OnInit {
     this.display3 = "block";
   }
 
+  openModal4() {
+    this.display3 = "block";
+  }
+
   showButton() {
     if (this.level == 0) {
       return false;
@@ -183,6 +196,7 @@ export class VendorDetailsComponent implements OnInit {
     this.display = "none";
     this.display2 = "none";
     this.display3 = "none";
+    this.display4 = "none";
   }
 
   get selectedOptions() { // right now: ['1','3']
@@ -270,6 +284,23 @@ export class VendorDetailsComponent implements OnInit {
       console.log(res);
       this.reportSubmitted = true;
     });
+  }
+
+  serve(file) {
+    window.open("assets/img/"+this.id+file+".png","_blank");
+  }
+
+  showReport() {
+    if(this.level < 4) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  report() {
+    window.open("assets/img/"+this.id+".png","_blank");
   }
 
 

@@ -120,7 +120,7 @@ export class ContactComponent implements OnInit {
             console.log(response);
             alert("Form saved successfully, Please complete all tabs and click submit to continue");
             this.save(form);
-            this.formDataService.updates(3);
+            this.formDataService.updates(2);
 
           },
           (error) => {

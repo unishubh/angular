@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Http, Headers, Response } from "@angular/http"
-import { formData, CompanyContact, CompanyDetails, Contact, Promoter, Sales, Manufatureres } from './models/vedndors';
+import { formData, CompanyContact, CompanyDetails, Contact, Promoter, Sales, Manufatureres, Branches, Declaration } from './models/vedndors';
 
 @Injectable()
 export class FormDataService {
@@ -13,6 +13,7 @@ export class FormDataService {
   private _fields_url = "http://localhost:3000/api/vendorDetails";
   public flag = 0;
   public flago = 0;
+  public flagb = 0;
 
   constructor(public http: Http) { }
 
@@ -36,17 +37,20 @@ export class FormDataService {
     this.setComapyContact(data);
     this.setCompanyDetails(data);
     this.setContact(data);
+    this.setDeclaration(data);
 
     console.log(this.formData.vendor_name);
     console.log(this.formData.company_type);
   }
 
-  initOthers(s, m, p) {
+  initOthers(s, m, p,b) {
     console.log("inniting others");
     this.flago = 1;
+    this.flagb=1;
     this.setSales(s);
     this.setPromoters(p);
     this.setManufacturers(m);
+    this.setBranches(b);
 
   }
 
@@ -66,6 +70,7 @@ export class FormDataService {
       website: this.formData.website,
       company_contact: this.formData.company_contact,
       others: this.formData.others,
+      branch: this.formData.branch,
     }
 
     return companyContact;
@@ -84,10 +89,7 @@ export class FormDataService {
 
       this.formData.promoter.push(s);
     }
-    // for (d in data) {
-    //   console.log(data[d].promoter);
-
-    // }
+    
     console.log(this.formData.promoter);
     console.log(this.formData);
 
@@ -124,6 +126,43 @@ export class FormDataService {
       this.formData.manufatureres.push(s);
     }
   }
+
+  setBranches(data) {
+    console.log(data);
+    this.formData.branches.length = 0;
+    console.log(this.formData.branches);
+    let d: any;
+    for (d = 0; d < data.length; d++) {
+      let s: Branches = new Branches();
+      s.branch_address = data[d].branch_address;
+      s.branch_city = data[d].branch_city;
+      s.branch_gst_number = data[d].branch_gst_number;
+      s.branch_phone_number = data[d].branch_phone_number;
+      s.branch_pin_code = data[d].branch_pin_code;
+      s.branch_state = data[d].branch_state;
+
+      this.formData.branches.push(s);
+    }
+  }
+
+  getBranches() {
+    console.log(this.formData);
+    let branches: Branches[] = [];
+    for(let d = 0;d<this.formData.branches.length; d++) {
+      let s: Branches = new Branches();
+      s.branch_address =  this.formData.branches[d].branch_address;
+      s.branch_city =  this.formData.branches[d].branch_city;
+      s.branch_gst_number =  this.formData.branches[d].branch_gst_number;
+      s.branch_phone_number =  this.formData.branches[d].branch_phone_number;
+      s.branch_pin_code =  this.formData.branches[d].branch_pin_code;
+      s.branch_state =  this.formData.branches[d].branch_state;
+
+      branches.push(s);
+    }
+    console.log(branches);
+    return branches;
+  }
+
 
 
   getPromoters() {
@@ -185,6 +224,29 @@ export class FormDataService {
     this.formData.company_contact = data.company_contact;
     //this.formData.others = data.others;
     console.log(this.formData.vendor_name);
+  }
+
+
+  setDeclaration(data) {
+    console.log("setting declaration");
+    this.formData.declaration_date = data.declaration_date;
+    this.formData.declaration_designation = data.declaration_designation;
+    this.formData.declaration_name = data.declaration_name;
+    this.formData.declaration_place = data.declaration_place
+
+    //this.formData.others = data.others;
+    console.log(this.formData.vendor_name);
+  }
+
+  getDeclaration(): Declaration {
+    let declaration = {
+      declaration_date: this.formData.declaration_date,
+      declaration_designation: this.formData.declaration_designation,
+      declaration_name: this.formData.declaration_name,
+      declaration_place: this.formData.declaration_place
+    }
+
+    return declaration;
   }
 
   getCompanyDetails(): CompanyDetails {
@@ -263,12 +325,13 @@ export class FormDataService {
     this.formData.contact = data.contact;
     this.formData.others = data.others;
     this.formData.files = data.files;
+    this.formData.branch = data.branches;
   }
 
   showSubmit() {
     console.log("here");
-    console.log(this.formData.others, this.formData.company_details, this.formData.company_contact, this.formData.contact, this.formData.files);
-    if (this.formData.others == 1 && this.formData.company_details == 1 && this.formData.company_contact == 1 && this.formData.contact == 1 && this.formData.files == 1) {
+    console.log(this.formData.others, this.formData.company_details, this.formData.company_contact, this.formData.contact, this.formData.files, this.formData.branch);
+    if (this.formData.others == 1 && this.formData.company_details == 1 && this.formData.company_contact == 1 && this.formData.contact == 1 && this.formData.files == 1 && this.formData.branch) {
       return true;
     }
     else {
@@ -296,6 +359,10 @@ export class FormDataService {
       }
       case 5: {
         this.formData.files = 1;
+        break;
+      }
+      case 6: {
+        this.formData.branch = 1;
         break;
       }
     }

@@ -16,6 +16,7 @@ import {CompanyDetailsComponent} from './../views/forms/company-details/company-
 import {OthersComponent} from './../views/forms/others/others.component';
 import {ContactComponent} from './../views/forms/contact/contact.component';
 import {FilesComponent} from './../views/forms/files/files.component';
+import {BranchComponent} from './../views/forms/branch/branch.component';
 
 
 import { CheckGuard } from './../_guards';
@@ -46,6 +47,7 @@ import { CompanyContact } from '../services/models/vedndors';
         {path: 'others/:identifier/:update', component: OthersComponent},
         {path: 'contact/:identifier/:update', component: ContactComponent},
         {path: 'files/:identifier/:update', component: FilesComponent},
+        {path: 'branch/:identifier/:update', component: BranchComponent},
 
         
         {path: 'userList', component : UserlistComponent},

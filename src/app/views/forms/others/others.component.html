@@ -1,7 +1,12 @@
 <style>
-    input {
+     .form-control {
       background-color: gainsboro;
       border-radius: 10px 10px 10px 10px;
+    }
+     .tab {
+      background-color: gainsboro;
+      border-radius: 0px 0px 0px 0px;
+      margin : 5px 5px 5px 5px;
     }
     select {
       background-color: gainsboro;
@@ -22,6 +27,8 @@
     <li><a (click)="goTo('ert','others')" data-toggle="tab">Other Information</a>
     </li>
     <li ><a (click)="goTo('ert','files')" data-toggle="tab"> Documents</a>
+    </li>
+    <li ><a (click)="goTo('ert','branch')" data-toggle="tab"> Branches</a>
     </li>
   </ul>
  
@@ -104,47 +111,114 @@
 </div>
 
 <div class="ui raised very padded text container segment">
-    <div *ngFor = "let sale of sales">
+ 
+      <table>
+          <thead>
+            <tr>
+              
+              <th>Product Supplied</th>
+              <th>Turnover</th>
+              <th>Percent of Total Sales</th>
+              <!-- <th>Category</th>
+              <th>Product Type</th>
+              <th>Type</th>
+              <th>Country</th>
+              <th>Payment Term</th>
+              <th>Incoterms</th>
+              <th>Initiated By</th>
+              <th>Form Allocated</th>
+              <th> Details</th> -->
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of sales">
+             
+              <td><input id="textinput" name="textinput" type="text" class="tab" [(ngModel)]="sale.product_supplied"></td>
+              <td><input id="textinput" name="textinput" type="text" class="tab" [(ngModel)]="sale.turnover"></td>
+              <td><input id="textinput" name="textinput" type="text" class="tab" [(ngModel)]="sale.business_percentage"></td>
+              <!-- <td>{{i.category}}</td>
+              <td>{{i.product_type}}</td>
+              <td>{{i.type}}</td>
+              <td>{{i.country}}</td>
+              <td>{{i.payment_term}}</td>
+              <td>{{i.incoterms}}</td>
+              <td>{{i.username}}</td>
+              <td>{{i.form_allocated}}</td>
+              <td> <a a [routerLink]="['/starter/vendorDetails', i.identifier]"><button class="btn btn-primary">View Details</button></a></td> -->
+            </tr>
+          </tbody>
+        </table>
         <div class="form-row">
-            <div class = "col-md-6">
-                <label style="text-align: right;" class="control-label" for="textinput">Product Supplied</label>
-                <input id="textinput" name="textinput" type="text" class="form-control input-md" [(ngModel)]="sale.product_supplied">
-
-            </div>
-            <div class = "col-md-6">
-                <label style="text-align: right;" class="control-label" for="textinput">Turnover</label>
-                <input id="textinput" name="textinput" type="text" class="form-control input-md" [(ngModel)]="sale.turnover">
-            </div>
+          <div class="col-md-8"></div>
+          <div class="col-md-4">
+              <button id="singlebutton" type="button" class="btn btn-primary" (click)="addSales()">Add more
+                  Sales</button>
           </div>
-          <br>
-          <br>
-          <br>
-          <br>
-          <div class="form-row">
-              <div class = "col-md-6">
-                  <label style="text-align: right;" class="control-label" for="textinput">Percent of Total Sales</label>
-                  <input id="textinput" name="textinput" type="text" class="form-control input-md" [(ngModel)]="sale.business_percentage">
+          
+        </div>
+      
+        
 
-              </div>
-              <div class = "col-md-6">
-                  
-              </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class = "form-row">
-              <div class="col-md-offset-7">
-                  <button id="singlebutton" type="button" class="btn btn-primary" (click)="addSales()">Add more
-                      Sales</button>
-              </div>
-            </div>
-      </div>
+
+
+
+
 </div>
 
+
+
+<div class="ui raised very padded text container segment">
+    <label class="checkbox-inline"> <input name="isChecked" type="checkbox" [(ngModel)]="isChecked.value" />
+      I hereby declare that all the information provided are correct, and in the event of any changes, details will be provided as soon as possible.</label>
+    <br>
+    <form #personalForm="ngForm" class="form-horizontal editable">
+        <div class="form-row">
+            <div class="col-md-6">
+              <label style="text-align: right;" class="control-label" for="textinput">Name</label>
+              <input id="textinput" name="textinput" type="text"  name="name"
+                class="form-control input-md" placeholder="Contact Person" required pattern="[a-zA-Z ]*"  [(ngModel)]="declaration.declaration_name">
+            </div>
+            <div class="col-md-6">
+              <label style="text-align: right;" class="control-label" for="textinput">Date</label>
+              <input id="textinput" name="textinput" type="date" name="date" class="form-control input-md"
+                 required [(ngModel)]="declaration.declaration_date">
+            </div>
+          </div>
+
+          <div class="form-row">
+              <div class="col-md-6">
+                <label style="text-align: right;" class="control-label" for="textinput">Designation</label>
+                <input id="textinput" name="textinput" type="text"  name="designation"
+                  class="form-control input-md" placeholder="Contact Person" required pattern="[a-zA-Z ]*" [(ngModel)]="declaration.declaration_designation">
+              </div>
+              <div class="col-md-6">
+                <label style="text-align: right;" class="control-label" for="textinput">Place</label>
+                <input id="textinput" name="textinput" type="text" name="place" class="form-control input-md" [(ngModel)]="declaration.declaration_place"
+                   required>
+              </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="col-md-4 col-md-offset-9">
+                        <button id="singlebutton" (click)="submit(personalForm.value)" class="ui blue primary button">Save</button>
+                      </div>
+        
+                </div>
+                <div class="col-md-6">
+                    
+                    <button id="singlebutton" (click)="superSubmit('')" class=" negative ui button">Submit</button>
+                    
+                </div>
+              </div>
+    </form>
+
+</div>
+
+
  <div class="ui raised very padded text container segment">
-    <div class="form-row">
+    <!-- <div class="form-row">
         <div class="col-md-6">
             <div class="col-md-4 col-md-offset-9">
                 <button id="singlebutton" (click)="submit(personalForm)" class="ui blue primary button">Save</button>
@@ -156,7 +230,7 @@
             <button id="singlebutton" (click)="superSubmit('')" class=" negative ui button">Submit</button>
             
         </div>
-      </div>
+      </div> -->
  </div>
       <!-- <div class="form-group" *ngFor="let promoter of promoters">
         <label class="col-md-4 control-label" for="textinput">Promoter</label>

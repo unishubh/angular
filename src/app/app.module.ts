@@ -39,6 +39,7 @@ import { CompanyDetailsComponent } from './views/forms/company-details/company-d
 import { ContactComponent } from './views/forms/contact/contact.component';
 import { OthersComponent } from './views/forms/others/others.component';
 import { FilesComponent } from './views/forms/files/files.component';
+import { BranchComponent } from './views/forms/branch/branch.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { FilesComponent } from './views/forms/files/files.component';
     ContactComponent,
     OthersComponent,
     FilesComponent,
+    BranchComponent,
    
   
   ],

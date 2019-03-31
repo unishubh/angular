@@ -27,73 +27,77 @@
   </ul>
 
   <div class="ui raised very padded text container segment" id="22b">
+
+      <label class="checkbox-inline"> <input name="isChecked" type="checkbox" [(ngModel)]="isChecked.value" />
+        I hereby declare that all the information provided are correct, and in the event of any changes, details will be provided as soon as possible.</label>
+      <br>
     <form #detailsForm="ngForm" class="form-horizontal editable">
+        {{isChecked.value}}
+      <div *ngIf= "showForm() || isChecked.value">
+      <div  *ngFor="let branch of branches " >
       <div class="form-row">
         <div class="col-md-6">
-          <label style="text-align: right;" class="control-label" for="textinput">Contact Person</label>
-          <input id="textinput" name="textinput" type="text" [(ngModel)]="contact.contact_person" name="contact_person"
-            class="form-control input-md" placeholder="Contact Person" required pattern="[a-zA-Z ]*">
-          <div *ngIf="detailsForm.controls.contact_person.errors && detailsForm.controls.contact_person.dirty"
-            class="my_alert" style="margin-top: 3px; color: red">
-            *This field is required with only aplhabets allowed.
-          </div>
-          <div *ngIf="isTrue('Contact Person')" class="my_alert" style="margin-top: 3px; color: red">
-            *Please check this field.
-          </div>
+          <label style="text-align: right;" class="control-label" for="textinput">Address</label>
+          <input id="textinput" name="textinput" type="text" [(ngModel)]="branch.branch_address" name="contact_person"
+            class="form-control input-md" placeholder="Address" required pattern="[a-zA-Z ]*">
         </div>
         <div class="col-md-6">
-          <label style="text-align: right;" class="control-label" for="textinput">Email</label>
-          <input id="textinput" name="textinput" type="email" name="email" class="form-control input-md"
-            [(ngModel)]="contact.email" required>
-          <div *ngIf="detailsForm.controls.email.errors && detailsForm.controls.email.dirty" class="my_alert"
-            style="margin-top: 3px; color: red">
-            *This field is required
-          </div>
-          <div *ngIf="isTrue('Email')" class="my_alert" style="margin-top: 3px; color: red">
-            *Please check this field.
-          </div>
+          <label style="text-align: right;" class="control-label" for="textinput">City</label>
+          <input id="textinput" name="textinput" type="email" name="branch_city" class="form-control input-md"
+            [(ngModel)]="branch.branch_city" required>
         </div>
       </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Pin Code</label>
+          <input id="textinput" name="textinput" type="text" [(ngModel)]="branch.branch_pin_code" name="contact_person"
+            class="form-control input-md" placeholder="Pin Code" required pattern="[a-zA-Z ]*">
+        </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">State</label>
+          <input id="textinput" name="textinput" type="text" name="branch_state" class="form-control input-md"
+            [(ngModel)]="branch.branch_state" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Phone Number</label>
+          <input id="textinput" name="textinput" type="text" [(ngModel)]="branch.branch_phone_number" name="branch_phone_number"
+            class="form-control input-md"  required >
+        </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">GST Numbers</label>
+          <input id="textinput" name="textinput" type="text" name="branch_state" class="form-control input-md"
+            [(ngModel)]="branch.branch_gst_number" required>
+        </div>
+      </div>
+
       <br>
       <br>
       <br>
       <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
       
       <div class="form-row">
-        <div class="col-md-6">
-          <label style="text-align: right;" class="control-label" for="textinput">Designation</label>
-          <input id="textinput" name="textinput" type="text" name="designation" class="form-control input-md"
-            [(ngModel)]="contact.designation" placeholder="Designation" required>
-          <div *ngIf="detailsForm.controls.designation.errors && detailsForm.controls.designation.dirty"
-            class="my_alert" style="margin-top: 3px; color: red">
-            *This field is required
-          </div>
-          <div *ngIf="isTrue('Designation')" class="my_alert" style="margin-top: 3px; color: red">
-            *Please check this field.
-          </div>
-
+        <div class="col-md-9">
+         
         </div>
-        <div class="col-md-6">
-          <label style="text-align: right;" class="control-label" for="textinput">Phone</label>
-          <input id="textinput" name="textinput" type="tel" name="contact_phone" class="form-control input-md"
-            [(ngModel)]="contact.contact_phone" required minlength="10" pattern="^[0-9]*$">
-          <div *ngIf="detailsForm.controls.contact_phone.errors && detailsForm.controls.contact_phone.dirty"
-            class="my_alert" style="margin-top: 3px; color: red">
-            *This field is required
-          </div>
-          <div *ngIf="isTrue('Phone')" class="my_alert" style="margin-top: 3px; color: red">
-            *Please check this field.
-          </div>
+        <div class="col-md-3">
+            <br>
+            
+          <button id="singlebutton" type="button" class="btn btn-primary" (click)="addBranch()">Add Branchess</button>
         </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
+
       <div class="form-row">
         <div class="col-md-6">
           <div class="col-md-4 col-md-offset-9">
-            <button id="singlebutton" (click)="submit(detailsForm)" [disabled]="!detailsForm.valid"
+            <button id="singlebutton" (click)="submit()" 
               class="ui blue primary button">Save</button>
           </div>
 

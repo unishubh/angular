@@ -37,6 +37,7 @@ export class CompanyContact {
     website: string;
     company_contact : number;
     others : number;
+    branch: number;
 }
 
 export class Contact {
@@ -91,6 +92,23 @@ export class Manufatureres {
 
 
 }
+
+export class Branches {
+    branch_address : string;
+    branch_city :string;
+    branch_pin_code : string;
+    branch_state : string;
+    branch_phone_number: string;
+    branch_gst_number: string;
+}
+
+export class Declaration {
+    declaration_date: string;
+    declaration_designation: string;
+    declaration_place: string;
+    declaration_name: string;
+}
+
 export class formData {
     vendor_name: string = '';
     office_address: string = '';;
@@ -128,4 +146,10 @@ export class formData {
     promoter: any[] = [];
     sale: any[] = [];
     manufatureres: any[] = [];
+    branches: any[]=[];
+    branch: number;
+    declaration_date: string;
+    declaration_designation: string;
+    declaration_place: string;
+    declaration_name: string;
 }

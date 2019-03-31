@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Headers, Response } from '@angular/http';
-import { CompanyContact, CompanyDetails } from '../../../services/models/vedndors';
+import { CompanyContact, CompanyDetails, Declaration } from '../../../services/models/vedndors';
 import { FormDataService } from '../../../services/form-data.service';
 import { company_type, industry_type, vendor_type } from '../../../form_data/vendor_link'
 
@@ -13,6 +13,7 @@ import { company_type, industry_type, vendor_type } from '../../../form_data/ven
 export class CompanyDetailsComponent implements OnInit {
 
   public companyDetails: CompanyDetails;
+  public declaration: Declaration;
   public industry_type: any[] = industry_type;
   public vendor_type: any[] = vendor_type;
   public company_type: any[] = company_type;
@@ -24,6 +25,7 @@ export class CompanyDetailsComponent implements OnInit {
   private _fields_url = "http://localhost:3000/api/declineFields";
   public isData = false;
   public isForm2 = false;
+  fd = new FormData();
   constructor(private route: ActivatedRoute, private router: Router, private formDataService: FormDataService, private http: Http) { }
 
   ngOnInit() {
@@ -55,13 +57,15 @@ export class CompanyDetailsComponent implements OnInit {
               }
               console.log("getting data");
               this.companyDetails = this.formDataService.getCompanyDetails();
-              console.log(this.companyDetails);
+              this.declaration = this.formDataService.getDeclaration();
+              console.log(this.declaration);
               this.isData = true;
             },
             (error) => {
               console.log("error aayi", error);
               console.log("no data");
               this.companyDetails = this.formDataService.getCompanyDetails();
+              this.declaration = this.formDataService.getDeclaration();
               console.log(this.companyDetails);
               this.isData = true;
             }
@@ -118,6 +122,7 @@ export class CompanyDetailsComponent implements OnInit {
     // }
 
     this.formDataService.setCompanyDetails(this.companyDetails);
+    this.formDataService.setDeclaration(this.declaration);
     return true;
   }
 
@@ -190,6 +195,28 @@ export class CompanyDetailsComponent implements OnInit {
     }
     else
       return false;
+  }
+
+  onFileChange(event) {
+    let dec = <File>event.target.files[0];
+          let ex = dec.name.indexOf('.');
+          let extension = dec.name.substring(ex);
+          this.fd.append('dec', dec, this.identifier+'dec'+extension);
+  }
+
+  upload () {
+    this.fd.append("identifier",String(this.identifier));
+    const headers = new Headers();
+    //headers.append('Content-Type', 'application/x-www-form-urlencoded');
+     // headers.append('Accept', 'application/json');
+    console.log(this.fd);
+    this.http.post("http://localhost:3000/api/uploadeDeclaration", this.fd)
+    .subscribe(res => {
+      console.log(res);
+      alert("Files uploaded successfully");
+      this.formDataService.updates(5);
+      
+    });
   }
 
 

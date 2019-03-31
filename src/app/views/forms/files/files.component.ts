@@ -129,8 +129,9 @@ export class FilesComponent implements OnInit {
     this.http.post("http://localhost:3000/api/uploader", this.fd)
     .subscribe(res => {
       console.log(res);
-      this.formDataService.setStatus(5);
       alert("Files uploaded successfully");
+      this.formDataService.updates(5);
+      
     });
   }
 

@@ -1,287 +1,345 @@
 <style>
-    input {
-      background-color: gainsboro;
-      border-radius: 10px 10px 10px 10px;
-    }
-    select {
-      background-color: gainsboro;
-    }
-    </style>
+  input {
+    background-color: gainsboro;
+    border-radius: 10px 10px 10px 10px;
+  }
 
-<section *ngIf= "isData && show" >
+  select {
+    background-color: gainsboro;
+  }
+</style>
+
+<section *ngIf="isData && show">
   <form #detailsForm="ngForm" class="form-horizontal editable" novalidate>
     <ul class="nav nav-pills">
       <li class="getClass('1')">
-        <a (click)="goTo(detailsForm,'companyContact')"  data-toggle="tab">Company Contact</a>
+        <a (click)="goTo(detailsForm,'companyContact')" data-toggle="tab">Company Contact</a>
       </li>
       <li id="tab2"><a (click)="goTo(detailsForm,'contact')" data-toggle="tab">Contact
           Information</a>
       </li>
-      <li ><a (click)="goTo(detailsForm,'companyDetails')" data-toggle="tab">Company Details</a>
+      <li><a (click)="goTo(detailsForm,'companyDetails')" data-toggle="tab">Company Details</a>
       </li>
-      <li ><a (click)="goTo(detailsForm,'others')" data-toggle="tab">Other Information</a>
+      <li><a (click)="goTo(detailsForm,'others')" data-toggle="tab">Other Information</a>
       </li>
-      <li ><a (click)="goTo('ert','files')" data-toggle="tab"> Documents</a>
+      <li><a (click)="goTo('ert','files')" data-toggle="tab"> Documents</a>
+      </li>
+      <li><a (click)="goTo('ert','branch')" data-toggle="tab"> Branches</a>
       </li>
     </ul>
     <div class="ui raised very padded text container segment">
-        <div class="form-row">
-            <div class="col-md-6">
-                <label style="text-align: right;" class="control-label" for="textinput">GST No.</label>
-                <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md" 
-            [(ngModel)]="companyDetails.gst" placeholder="GST No" required>
-            <div *ngIf="detailsForm.controls.gst.errors && detailsForm.controls.gst.dirty" class="my_alert" style="margin-top: 3px; color: red">
-              *This field is required
-            </div>
-            <div *ngIf="isTrue('GST')" class="my_alert" style="margin-top: 3px; color: red">
-              *Please check this field.
-            </div>
-            </div>
-            <div class="col-md-6">
-                <label style="text-align: right;" class="control-label" for="textinput">PAN</label>
-                <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md" 
-            [(ngModel)]="companyDetails.pan" placeholder="PAN" required>
-            <div *ngIf="detailsForm.controls.pan.errors && detailsForm.controls.pan.dirty" class="my_alert" style="margin-top: 3px; color: red">
-              *This field is required
-            </div>
-            <div *ngIf="isTrue('PAN')" class="my_alert" style="margin-top: 3px; color: red">
-              *Please check this field.
-            </div>
-            </div>
+      <h5>Please provide details of the Bank Account from which transactions with Future Group will be done</h5>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class=" control-label" for="textinput">Type of Company</label>
+
+          <select class="form-control input-md" name="company_type" [(ngModel)]="companyDetails.company_type" required>
+            <option selected>Open this select menu</option>
+            <option *ngFor='let type of company_type' [value]="type">
+              {{type}}
+            </option>
+          </select>
+          <div *ngIf="detailsForm.controls.company_type.errors && detailsForm.controls.company_type.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
           </div>
-          <br>
-          <br>
-          <br>
-          <br>
+          <div *ngIf="isTrue('Type of Company')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
 
-          <div *ngIf="isForm2" class="form-row">
-              <div *ngIf="isForm2" class="col-md-6">
-                  <label style="text-align: right;" class="control-label" for="textinput">Aadhar</label>
-                  <input id="textinput" name="textinput" type="text" name="aadhar" class="form-control input-md"
-                  [(ngModel)]="companyDetails.aadhar" placeholder="Aadhar" required minlength="12">
-                  <div *ngIf="detailsForm.controls.aadhar.errors && detailsForm.controls.aadhar.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                    *This field is required, with minimum length 12.
-                  </div>
-                  <div *ngIf="isTrue('Aadhar')" class="my_alert" style="margin-top: 3px; color: red">
-                    *Please check this field.
-                  </div>
-      
-              </div>
-              <div *ngIf = "isForm2" class="col-md-6">
-                  <label style="text-align: right;" class="control-label" for="textinput">Provident Fund No.</label>
-                  <input id="textinput" name="textinput" type="text" name="pf" class="form-control input-md"
-             [(ngModel)]="companyDetails.pf" placeholder="Provident Fund No." required>
-             <div *ngIf="detailsForm.controls.pf.errors && detailsForm.controls.pf.dirty" class="my_alert" style="margin-top: 3px; color: red">
-              *This field is required
-            </div>
-            <div *ngIf="isTrue('Provident')" class="my_alert" style="margin-top: 3px; color: red">
-              *Please check this field.
-            </div>
-              </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div *ngIf = "isForm2" class="form-row">
-                <div class="col-md-6">
-                    <label style="text-align: right;" class="control-label" for="textinput">Exice Registration No. (if any)</label>
-                    <input id="textinput" name="textinput" type="text" name="exice" class="form-control input-md"
-                    [(ngModel)]="companyDetails.exice" placeholder="Exice">
-        
-                </div>
-                <div *ngIf = "isForm2" class="col-md-6">
-                    <label style="text-align: right;" class="control-label" for="textinput">ESIC</label>
-                    <input id="textinput" name="textinput" type="text" name="esic" class="form-control input-md"
-             [(ngModel)]="companyDetails.esic" placeholder="ESIC" required>
-             <div *ngIf="detailsForm.controls.esic.errors && detailsForm.controls.esic.dirty" class="my_alert" style="margin-top: 3px; color: red">
-              *This field is required
-            </div>
-            <div *ngIf="isTrue('ESIC')" class="my_alert" style="margin-top: 3px; color: red">
-              *Please check this field.
-            </div>
-                </div>
-              </div>
-              <br>
-              <br>
-              <br>
-              <br>
-              <div class="form-row">
-                  <div class="col-md-6">
-                      <label style="text-align: right;" class="control-label" for="textinput">SSI Details</label>
-                      <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md" 
-                      [(ngModel)]="companyDetails.ssi" placeholder="SSi Details" required>
-                      <div *ngIf="detailsForm.controls.ssi.errors && detailsForm.controls.ssi.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                        *This field is required
-                      </div>
-                      <div *ngIf="isTrue('SSI')" class="my_alert" style="margin-top: 3px; color: red">
-                        *Please check this field.
-                      </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Type of Industry</label>
+
+          <select class="form-control input-md" name="industry_type" [(ngModel)]="companyDetails.industry_type"
+            required>
+            <option selected>Open this select menu</option>
+            <option *ngFor='let type of industry_type' [value]="type">
+              {{type}}
+            </option>
+          </select>
+          <div *ngIf="detailsForm.controls.industry_type.errors && detailsForm.controls.industry_type.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Type of Industry')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      <div class="form-row">
+
+        <div class="col-md-6">
+          <label style="text-align: right;" class=" control-label" for="textinput">Type of Vendor</label>
+
+          <select class="form-control input-md" name="vendor_type" [(ngModel)]="companyDetails.vendor_type" required>
+            <option selected>Open this select menu</option>
+            <option *ngFor='let type of vendor_type' [value]="type">
+              {{type}}
+            </option>
+          </select>
+          <div *ngIf="detailsForm.controls.vendor_type.errors && detailsForm.controls.vendor_type.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Type of Vendor')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">PAN</label>
+          <input id="textinput" name="textinput" type="text" name="pan" class="form-control input-md"
+            [(ngModel)]="companyDetails.pan" placeholder="PAN" required>
+          <div *ngIf="detailsForm.controls.pan.errors && detailsForm.controls.pan.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('PAN')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Bank</label>
+          <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md"
+            [(ngModel)]="companyDetails.bank_name" required>
+          <div *ngIf="detailsForm.controls.bank_name.errors && detailsForm.controls.bank_name.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Bank')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Account Number</label>
+          <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md"
+            [(ngModel)]="companyDetails.bank_account_number" required>
+          <div *ngIf="detailsForm.controls.bank_account_number.errors && detailsForm.controls.bank_account_number.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Account Number')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <label style="text-align: right;" class="control-label" for="textinput">IFSC</label>
+          <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md"
+            [(ngModel)]="companyDetails.ifsc" required>
+          <div *ngIf="detailsForm.controls.ifsc.errors && detailsForm.controls.ifsc.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('IFSC')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+
+      <div *ngIf="isForm2" class="form-row">
+        <div *ngIf="isForm2" class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Aadhar</label>
+          <input id="textinput" name="textinput" type="text" name="aadhar" class="form-control input-md"
+            [(ngModel)]="companyDetails.aadhar" placeholder="Aadhar" required minlength="12">
+          <div *ngIf="detailsForm.controls.aadhar.errors && detailsForm.controls.aadhar.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required, with minimum length 12.
+          </div>
+          <div *ngIf="isTrue('Aadhar')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+
+        </div>
+        <div *ngIf="isForm2" class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Provident Fund No.</label>
+          <input id="textinput" name="textinput" type="text" name="pf" class="form-control input-md"
+            [(ngModel)]="companyDetails.pf" placeholder="Provident Fund No." required>
+          <div *ngIf="detailsForm.controls.pf.errors && detailsForm.controls.pf.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Provident')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div *ngIf="isForm2" class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Exice Registration No. (if
+            any)</label>
+          <input id="textinput" name="textinput" type="text" name="exice" class="form-control input-md"
+            [(ngModel)]="companyDetails.exice" placeholder="Exice">
+
+        </div>
+        <div *ngIf="isForm2" class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">ESIC</label>
+          <input id="textinput" name="textinput" type="text" name="esic" class="form-control input-md"
+            [(ngModel)]="companyDetails.esic" placeholder="ESIC" required>
+          <div *ngIf="detailsForm.controls.esic.errors && detailsForm.controls.esic.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('ESIC')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">SSI Details</label>
+          <input id="textinput" name="textinput" type="text" name="ssi" class="form-control input-md"
+            [(ngModel)]="companyDetails.ssi" placeholder="SSi Details" required>
+          <div *ngIf="detailsForm.controls.ssi.errors && detailsForm.controls.ssi.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('SSI')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">Effective Date</label>
+          <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md"
+            [(ngModel)]="companyDetails.effective_date" required>
+          <div *ngIf="detailsForm.controls.effective_date.errors && detailsForm.controls.effective_date.dirty"
+            class="my_alert" style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('Effective')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">GST No.</label>
+          <input id="textinput" name="textinput" type="text" name="gst" class="form-control input-md"
+            [(ngModel)]="companyDetails.gst" placeholder="GST No" required>
+          <div *ngIf="detailsForm.controls.gst.errors && detailsForm.controls.gst.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('GST')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+
+        <div *ngIf="isForm2" class="col-md-6">
+          <label style="text-align: right;" class="control-label" for="textinput">TDS section applicable</label>
+
+          <select class="form-control input-md" name="tds" [(ngModel)]="companyDetails.tds">
+            <option selected>Open this select menu</option>
+            <option value="YES">Yes </option>
+            <option value="NO">No </option>
+          </select>
+          <div *ngIf="detailsForm.controls.tds.errors && detailsForm.controls.tds.dirty" class="my_alert"
+            style="margin-top: 3px; color: red">
+            *This field is required
+          </div>
+          <div *ngIf="isTrue('TDS')" class="my_alert" style="margin-top: 3px; color: red">
+            *Please check this field.
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="form-row">
+        <div class="col-md-6">
+            <label style="text-align: left;" class="control-label"><b>Upload duly signed Copy of Decleration form (if not already done)</b></label>
+            <input placeholder="Aadhar Copy" id="aadhar_file" name="decleration" type="file" (change)="onFileChange($event)"
+            class="inputfile" #decleration>
           
-                  </div>
-                  <div  class="col-md-6">
-                      <label style="text-align: right;" class="control-label" for="textinput">Effective Date</label>
-                      <input id="textinput" name="textinput" type="text" name="effective_date" class="form-control input-md"
-                      [(ngModel)]="companyDetails.effective_date" required>
-                      <div *ngIf="detailsForm.controls.effective_date.errors && detailsForm.controls.effective_date.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                        *This field is required
-                      </div>
-                      <div *ngIf="isTrue('Effective')" class="my_alert" style="margin-top: 3px; color: red">
-                        *Please check this field.
-                      </div>
-                  </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label style="text-align: right;" class="control-label" for="textinput">Bank</label>
-                        <input id="textinput" name="textinput" type="text" name="bank_name" class="form-control input-md"
-                        [(ngModel)]="companyDetails.bank_name" required>
-                        <div *ngIf="detailsForm.controls.bank_name.errors && detailsForm.controls.bank_name.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                          *This field is required
-                        </div>
-                        <div *ngIf="isTrue('Bank')" class="my_alert" style="margin-top: 3px; color: red">
-                          *Please check this field.
-                        </div>
-            
-                    </div>
-                    <div  class="col-md-6">
-                        <label style="text-align: right;" class="control-label" for="textinput">Account Number</label>
-                        <input id="textinput" name="textinput" type="text" name="bank_account_number" class="form-control input-md"
-                        [(ngModel)]="companyDetails.bank_account_number" required>
-                        <div *ngIf="detailsForm.controls.bank_account_number.errors && detailsForm.controls.bank_account_number.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                          *This field is required
-                        </div>
-                        <div *ngIf="isTrue('Account Number')" class="my_alert" style="margin-top: 3px; color: red">
-                          *Please check this field.
-                        </div>
-                    </div>
-                  </div>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <div class = "form-row">
-                    <div class = "col-md-12">
-                        <label style="text-align: right;" class="control-label" for="textinput">IFSC</label>
-                        <input id="textinput" name="textinput" type="text" name="ifsc" class="form-control input-md" 
-                        [(ngModel)]="companyDetails.ifsc" required>
-                        <div *ngIf="detailsForm.controls.ifsc.errors && detailsForm.controls.ifsc.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                          *This field is required
-                        </div>
-                        <div *ngIf="isTrue('IFSC')" class="my_alert" style="margin-top: 3px; color: red">
-                          *Please check this field.
-                        </div>
-                    </div>
-                  </div>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-
-                  <div class="form-row">
-                      <div class="col-md-6">
-                        <label style="text-align: right;" class=" control-label" for="textinput">Type of Company</label>
-                       
-                        <select class="form-control input-md" name="company_type"  [(ngModel)]="companyDetails.company_type" required>
-                            <option selected>Open this select menu</option>
-                            <option *ngFor='let type of company_type' [value]="type">
-                              {{type}}
-                            </option>
-                          </select>
-                          <div *ngIf="detailsForm.controls.company_type.errors && detailsForm.controls.company_type.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                            *This field is required
-                          </div>
-                          <div *ngIf="isTrue('Type of Company')" class="my_alert" style="margin-top: 3px; color: red">
-                            *Please check this field.
-                          </div>
-                        </div>
-                      
-                      <div class="col-md-6">
-                        <label style="text-align: right;" class="control-label" for="textinput">Type of Industry</label>
-                       
-                        <select class="form-control input-md" name="industry_type"  [(ngModel)]="companyDetails.industry_type" required>
-                            <option selected>Open this select menu</option>
-                            <option *ngFor='let type of industry_type' [value]="type">
-                              {{type}}
-                            </option>
-                          </select>
-                          <div *ngIf="detailsForm.controls.industry_type.errors && detailsForm.controls.industry_type.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                            *This field is required
-                          </div>
-                          <div *ngIf="isTrue('Type of Industry')" class="my_alert" style="margin-top: 3px; color: red">
-                            *Please check this field.
-                          </div>
-                      </div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                          <label style="text-align: right;" class=" control-label" for="textinput">Type of Vendor</label>
-                         
-                          <select class="form-control input-md" name="vendor_type" [(ngModel)]="companyDetails.vendor_type" required>
-                              <option selected>Open this select menu</option>
-                              <option *ngFor='let type of vendor_type' [value]="type">
-                                {{type}}
-                              </option>
-                            </select>
-                            <div *ngIf="detailsForm.controls.vendor_type.errors && detailsForm.controls.vendor_type.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                              *This field is required
-                            </div>
-                            <div *ngIf="isTrue('Type of Vendor')" class="my_alert" style="margin-top: 3px; color: red">
-                              *Please check this field.
-                            </div>
-                          </div>
-                        
-                        <div *ngIf="isForm2" class="col-md-6">
-                          <label style="text-align: right;" class="control-label" for="textinput">TDS section applicable</label>
-                         
-                          <select class="form-control input-md" name="tds" [(ngModel)]="companyDetails.tds">
-                              <option selected>Open this select menu</option>
-                              <option value="YES">Yes </option>
-                              <option value="NO">No </option>
-                            </select>
-                            <div *ngIf="detailsForm.controls.tds.errors && detailsForm.controls.tds.dirty" class="my_alert" style="margin-top: 3px; color: red">
-                              *This field is required
-                            </div>
-                            <div *ngIf="isTrue('TDS')" class="my_alert" style="margin-top: 3px; color: red">
-                              *Please check this field.
-                            </div>
-                        </div>
-                      </div>
+        </div>
+        <div class="col-md-6">
+          <br>
+          <br>
+          <br>
+          <button id="singlebutton" (click)="upload()"
+              class="ui blue primary button">Upload</button>
+        </div>
+      </div>
 
 
 
 
 
-                      
 
 
 
 
-                      <br>
-                      <br>
-                      <br>
 
-                      <div class="form-row">
-                          <div class="col-md-6">
-                              <div class="col-md-4 col-md-offset-9">
-                                  <button id="singlebutton" (click)="submit(detailsForm)" [disabled]="!detailsForm.valid"  class="ui blue primary button">Save</button>
-                                </div>
-                
-                          </div>
-                          <div class="col-md-6">
-                              
-                              <button id="singlebutton" (click)="superSubmit('')" class=" negative ui button">Submit</button>
-                              
-                          </div>
-                        </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="col-md-4 col-md-offset-9">
+            <button id="singlebutton" (click)="submit(detailsForm)" [disabled]="!detailsForm.valid"
+              class="ui blue primary button">Save</button>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+
+          <button id="singlebutton" (click)="superSubmit('')" class=" negative ui button">Submit</button>
+
+        </div>
+      </div>
 
 
 
@@ -349,7 +407,7 @@
           </div>
         </div>
       </div> -->
-     
+
       <!-- <div *ngIf = "isForm2">
       <div  class="form-group">
         <label class="col-md-4 control-label" for="textinput">Aadhar Number</label>
@@ -497,13 +555,13 @@
           <button id="singlebutton" (click)="submit('detailsForm')" class="btn btn-primary">Save</button>
         </div>
       </div> -->
-        <!-- <div class="col-md-3 col-md-offset-1">
+      <!-- <div class="col-md-3 col-md-offset-1">
           <button id="singlebutton" (click)="save(detailsForm)" class="btn btn-primary ">Save</button>
         </div> -->
-        
-      </div>
-    
-    
+
+    </div>
+
+
   </form>
   <!-- <div class="form-group">
       <label class="col-md-4 control-label" for="singlebutton"></label>

@@ -26,14 +26,14 @@
 <div *ngIf="data">
 
 
-  <hr>
-  <div style="margin-left: 2%;" class="ui blue basic label">
-    <h2> Basic Details</h2>
+  <br>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Basic Details</h4>
   </div>
-  <hr>
+  <br>
   
   
-  <table class="table table-striped">
+  <table class="ui celled table">
     <thead>
       <tr>
        
@@ -82,13 +82,13 @@
 
 
 
-  <div style="margin-left: 2%;" class="ui blue basic label">
-    <h2> Documents</h2>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Documents</h4>
   </div>
-  <hr>
+  <br>
   
   
-  <table class="table table-striped">
+  <table class="ui celled table">
     <thead>
       <tr>
        
@@ -116,15 +116,15 @@
     <tbody>
       <tr>
         
-        <td>{{vendors.vendor_name}}</td>
-        <td>{{vendors.office_address}}</td>
-        <td>{{vendors.city}}</td>
-        <td>{{vendors.pin_code}}</td>
-        <td>{{vendors.phone}}</td>
-        <td>{{vendors.state}}</td>
-        <td>{{vendors.establishment_year}}</td>
-        <td>{{vendors.website}}</td>
-        <td>{{vendors.contact_name}}</td>
+        <td> <button *ngIf="file.aadhar != null" class="btn center btn-primary" (click)="serve('aadhar')">View</button> </td>
+        <td><button *ngIf="file.pan != null" class="btn center btn-primary" (click)="serve('pan')">View</button></td>
+        <td><button *ngIf="file.address_proof != null" class="btn center btn-primary" (click)="serve('address_proof')">View</button></td>
+        <td><button *ngIf="file.cheque != null" class="btn center btn-primary" (click)="serve('cheque')">View</button></td>
+        <td><button *ngIf="file.environment_certification != null" class="btn center btn-primary" (click)="serve('environment_certification')">View</button></td>
+        <td><button *ngIf="file.pf_file != null" class="btn center btn-primary" (click)="serve('pf_file')">View</button></td>
+        <td><button *ngIf="file.esic_copy != null" class="btn center btn-primary" (click)="serve('esic_copy')">View</button></td>
+        <td><button *ngIf="file.excise_file != null" class="btn center btn-primary" (click)="serve('excise_file')">View</button></td>
+        <td><button *ngIf="file.iso != null" class="btn center btn-primary" (click)="serve('iso')">View</button></td>
         <!-- <td>{{vendors.email}}</td>
         <td>{{vendors.designation}}</td>
         <td>{{vendors.contact_phone}}</td>
@@ -138,13 +138,76 @@
 
 
 
-  <hr>
-  <hr size="30">
-  <div class="ui horizontal divider"></div>
-  <div style="margin-left: 2%;" class="ui blue basic label">
-    <h2> Sales</h2>
+  <br>
+  <br>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Declaration</h4>
   </div>
-  <hr>
+  <br>
+  
+  
+  <table class="ui celled table">
+    <thead>
+      <tr>
+       
+        <th>Name</th>
+        <th>Place</th>
+        <th>Designation</th>
+        <th>Date</th>
+        
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        
+        <td>{{vendors.declaration_name}}</td>
+        <td>{{vendors.declaration_place}}</td>
+        <td>{{vendors.declaration_designation}}</td>
+        <td>{{vendors.declaration_date}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div class="ui horizontal divider"></div>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Branches</h4>
+  </div>
+  <br>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Pin Code</th>
+        <th>State</th>
+        <th>Phone Number</th>
+        <th>GST Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of branches;let c=index">
+        <th scope="row">{{c+1}}</th>
+        <td>{{i.branch_address}}</td>
+        <td>{{i.branch_city}}</td>
+        <td>{{i.branch_pin_code}}</td>
+        <td>{{i.branch_state}}</td>
+        <td>{{i.branch_phone_number}}</td>
+        <td>{{i.branch_gst_number}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div class="ui horizontal divider"></div>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Sales</h4>
+  </div>
+  <br>
   <table class="ui celled table">
     <thead>
       <tr>
@@ -163,12 +226,12 @@
       </tr>
     </tbody>
   </table>
-  <hr>
-  <hr size=30>
-  <div style="margin-left: 2%;" class="ui blue basic label">
-    <h2> Manufacturers</h2>
+  <br>
+  <br>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Manufacturers</h4>
   </div>
-  <hr>
+  <br>
   <table class="ui celled table">
     <thead>
       <tr>
@@ -193,12 +256,12 @@
       </tr>
     </tbody>
   </table>
-  <hr>
-  <hr size=30>
-  <div style="margin-left: 2%;" class="ui blue basic label">
-    <h2> Promoters</h2>
+  <br>
+  <br>
+  <div style="margin-left: 2%;" class="ui label">
+    <h4> Promoters</h4>
   </div>
-  <hr>
+  <br>
   <table class="ui celled table">
     <thead>
       <tr>
@@ -213,18 +276,19 @@
       </tr>
     </tbody>
   </table>
-  <hr>
+  <br>
 
-  <button *ngIf="showButton() && !isDecline" style="position:relative; left: 25%;" id="singlebutton" type="button"
+  <button *ngIf="showButton() && !isDecline" style="position:relative; left: 15%;" id="singlebutton" type="button"
     class="btn center btn-primary" (click)="verify()">Verify Vendor</button>
-  <button *ngIf="showButton() && isDecline" style="position:relative; left: 25%;" id="singlebutton" type="button" class="btn center btn-primary"
+  <button *ngIf="showButton() && isDecline" style="position:relative; left: 15%;" id="singlebutton" type="button" class="btn center btn-primary"
     (click)="isVerified()">Verify Vendor</button>
-  <button style="position:relative ;background-color:red; left: 60%;" id="singlebutton" type="button" class="btn center btn-primary"
+  <button style="position:relative ;background-color:red; left: 40%;" id="singlebutton" type="button" class="btn center btn-primary"
     *ngIf="showButton()" (click)="decline()">Decline Vendor</button>
 
-    <button style="position:relative ;background-color:red; left: 80%;" id="singlebutton" type="button" class="btn center btn-primary"
-    *ngIf="showReportSubmission()" (click)="openModal3()">Fill Report</button>
-    
+    <button style="position:relative ;background-color:red; left: 60%;" id="singlebutton" type="button" class="btn center btn-primary"
+    *ngIf="showReportSubmission()" (click)="openModal4()">Fill Report</button>
+    <button style="position:relative ;background-color:red; left: 60%;" id="singlebutton" type="button" class="btn center btn-primary"
+    *ngIf="showReport()" (click)="report()">See Report</button>
     
   <!-- <button style="position:relative ;background-color:red; left: 40%;" id="singlebutton" type="button" class="btn center btn-primary"
     *ngIf="isAdmin" (click)="edit()">Edit Details</button> -->
@@ -304,7 +368,7 @@
   </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display3}">
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display4}">
 
 
   <div class="modal-dialog" role="document">

@@ -15,10 +15,10 @@ select {
 <!-- Main content -->
 <section class="content">
 
-
+  <p>Vendor Details</p>
   <div class="ui raised very padded text container segment">
       <h3>
-          Add a new Vendor
+          Vendor to add details for On-Boarding purposes
         </h3>
         <br>
         <br>
@@ -27,6 +27,7 @@ select {
 
           <div class="form-row">
               <div class="col-md-6">
+                <label style="text-align: right;" class="control-label" for="textinput">Email</label>
                   <input id="textinput" name="textinput" type="email" name="vendor_email" class="form-control input-md"
                   formControlName="vendor_email" placeholder="Email">
                   <div *ngIf="!vendorForm.controls['vendor_email'].valid" class="my_alert" style="margin-top: 3px; color: red">
@@ -34,6 +35,7 @@ select {
                     </div>
               </div>
               <div class="col-md-6">
+                  <label style="text-align: right;" class="control-label" for="textinput">Country</label>
                   <input id="textinput" name="textinput" type="text" name="country" class="form-control input-md"
                   formControlName="country" placeholder="Country">
               </div>
@@ -45,8 +47,8 @@ select {
 
           <div class="form-row">
               <div class="col-md-6">
-                <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput"> Business Entity</label>
-              <div class="col-md-10">
+                  <label style="text-align: right;" class="control-label" for="textinput"> Business Entity</label>
+             
                   <select class="form-control input-md" name="company" formControlName="company">
                       <option selected>Open this select menu</option>
                       <option value="FEL">FEL</option>
@@ -57,17 +59,17 @@ select {
                       <option value="GIOVANI">GIOVANI</option>
                     </select>
                     
-              </div>
+              
               </div>
               <div class="col-md-6">
-                  <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">LOB</label>
-                  <div class="col-md-10" >
+                  <label style="text-align: right;" class="control-label" for="textinput">LOB</label>
+                 
                       <select class="form-control input-md" name="lob" formControlName="lob">
                           <option *ngFor='let lob of lobs' [value]="lob">
                             {{lob}}
                           </option>
                         </select>
-                    </div>
+                   
               </div>
             </div>
             <br>
@@ -76,25 +78,25 @@ select {
             <br>
             <div class="form-row">
                 <div class="col-md-6">
-                  <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Category</label>
-                <div class="col-md-10">
+                    <label style="text-align: right;" class="control-label" for="textinput">Category</label>
+               
                     <select class="form-control input-md" name="category" formControlName="category">
                         <option *ngFor='let category of categories' [value]="category">
                           {{category}}
                         </option>
                       </select>
                       
-                </div>
+                
                 </div>
                 <div class="col-md-6">
-                    <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Prod. Type</label>
-                    <div class="col-md-10" >
+                    <label style="text-align: right;" class="control-label" for="textinput">Prod. Type</label>
+                    
                         <select class="form-control input-md" name="product_type" formControlName="product_type">
                             <option *ngFor='let product_type of product_types' [value]="product_type">
                               {{product_type}}
                             </option>
                           </select>
-                      </div>
+                      
                 </div>
               </div>
               <br>
@@ -104,18 +106,18 @@ select {
 
               <div class="form-row">
                   <div class="col-md-6">
-                    <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Type</label>
-                  <div class="col-md-10">
+                      <label style="text-align: right;" class="control-label" for="textinput">Type</label>
+                 
                       <select class="form-control input-md" name="type" formControlName="type">
                           <option value="domestic">Domestic</option>
                           <option value="import">import</option>
                         </select>
                         
-                  </div>
+                  
                   </div>
                   <div class="col-md-6">
-                      <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Payment Term</label>
-                      <div class="col-md-10" >
+                      <label style="text-align: right;" class="control-label" for="textinput">Payment Term</label>
+                     
                           <select class="form-control input-mdt" name="payment_term" formControlName="payment_term">
                               <option value="10">10 days</option>
                               <option value="15">15 days</option>
@@ -128,7 +130,7 @@ select {
                               <option value="against lc">Against LC</option>
                               <option value="immediate">Immediate</option>
                             </select>
-                        </div>
+                        
                   </div>
                 </div>
               
@@ -139,22 +141,22 @@ select {
                 <div class="form-row">
                     <div class="col-md-6">
                      
-                   
+                        <label style="text-align: right;" class="control-label" for="textinput">Buying  Mode</label>
                         <input id="textinput" name="textinput" type="text" value="Outright" name="buying_mode" class="form-control input-md"
                         formControlName="buying_mode" placeholder="Buying Mode">
                           
                    
                     </div>
                     <div class="col-md-6">
-                        <label  style= "text-align: right;" class="col-md-2 control-label" for="textinput">Incoterms</label>
-                        <div class="col-md-10" >
+                        <label style="text-align: right;" class="control-label" for="textinput">Incoterms</label>
+                       
                             <select class="form-control input-mdt" name="incoterm" formControlName="incoterm">
                                 <option value="DDP">DDP</option>
                                 <option value="DDU">DDU</option>
                                 <option value="FOB">FOB</option>
                                 <option value="EXW">EXW</option>
                               </select>
-                          </div>
+                          
                     </div>
                   </div>
                   <br>
@@ -163,6 +165,7 @@ select {
             <br>
                   <div class = "form-row">
                     <div class="col-md-6">
+                        <label style="text-align: right;" class="control-label" for="textinput">Name</label>
                       <input id="textinput" name="textinput" type="text" name="name" class="form-control input-md"
                         formControlName="name" placeholder="Company Name">
           
@@ -175,8 +178,9 @@ select {
                   
                   <div class="form-row">
                       <div class="col-md-8">
-                       
+                          <label style="text-align: right;" class="control-label" for="textinput">Promoters</label>
                         <div *ngFor="let product of vendorForm.controls.products.controls; let vendorIndex=index;">
+
                             <input id="textinput" name="textinput" type="text" class="form-control input-md" formControlName="product" placeholder="Products">
                             <br>
                         </div>
@@ -185,6 +189,7 @@ select {
                      
                       </div>
                       <div class="col-md-4">
+                        <br>
                           <button id="singlebutton" type="button" class="btn btn-primary" (click)="addProduct()">Add more Products</button>
                       </div>
                     </div>
@@ -353,7 +358,7 @@ select {
 
         <br>
 
-        <div [ngStyle]="{'display':display3}">
+        <!-- <div [ngStyle]="{'display':display3}">
 
 
           <div class="modal-dialog" role="document">
@@ -384,7 +389,7 @@ select {
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
         <div class="form-group">
