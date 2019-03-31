@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class HistoryComponent implements OnInit {
 
   constructor(private http: Http, private router: Router) { }
-  private _url = "http://localhost:3000/api/vendors";
-  private _url_hist = "http://localhost:3000/api/history";
+  private _url = "http://13.234.109.247:3000/api/vendors";
+  private _url_hist = "http://13.234.109.247:3000/api/history";
   public showTable: boolean;
   public token: String;
   public vendors: any[];

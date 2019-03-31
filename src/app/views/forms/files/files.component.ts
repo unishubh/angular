@@ -14,7 +14,7 @@ export class FilesComponent implements OnInit {
   public aadhar : File;
   fd = new FormData();
   public identifier : Number;
-  private url = "http://localhost:3000/api/save";
+  private url = "http://13.234.109.247:3000/api/save";
   public editable :any;
   constructor(private route: ActivatedRoute, private router: Router, private http: Http, private formDataService: FormDataService) { }
 
@@ -126,7 +126,7 @@ export class FilesComponent implements OnInit {
     //headers.append('Content-Type', 'application/x-www-form-urlencoded');
      // headers.append('Accept', 'application/json');
     console.log(this.fd);
-    this.http.post("http://localhost:3000/api/uploader", this.fd)
+    this.http.post("http://13.234.109.247:3000/api/uploader", this.fd)
     .subscribe(res => {
       console.log(res);
       alert("Files uploaded successfully");
@@ -146,7 +146,7 @@ export class FilesComponent implements OnInit {
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       let content = new URLSearchParams();
       content.set('identifier', String(this.identifier));
-      this.http.post("http://localhost:3000/api/submitForm", content.toString(), { headers: headers })
+      this.http.post("http://13.234.109.247:3000/api/submitForm", content.toString(), { headers: headers })
       .subscribe (
         (response: Response) => {
           console.log(response.json());

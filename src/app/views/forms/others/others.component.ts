@@ -18,7 +18,7 @@ export class OthersComponent implements OnInit {
   public identifier: string;
   public isChanged: boolean = false;
   public show = true;
-  private url = "http://localhost:3000/api/save";
+  private url = "http://13.234.109.247:3000/api/save";
   public isChecked: any = { "value": false };
   public iseditable = 0;
   ngOnInit() {
@@ -99,7 +99,7 @@ export class OthersComponent implements OnInit {
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       let content = new URLSearchParams();
       content.set('identifier', this.identifier);
-      this.http.post("http://localhost:3000/api/submitForm", content.toString(), { headers: headers })
+      this.http.post("http://13.234.109.247:3000/api/submitForm", content.toString(), { headers: headers })
         .subscribe(
           (response: Response) => {
             console.log(response.json());

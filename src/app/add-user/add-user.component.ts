@@ -36,7 +36,7 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  private _url = 'http://localhost:3000/api/register';
+  private _url = 'http://13.234.109.247:3000/api/register';
 
   showDep() {
     if(this.level < 5) {

@@ -14,7 +14,7 @@ export class LoginService {
   constructor(private http: Http, private router: Router) {
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
-    this.api_url = "localhost:3000/";
+    this.api_url = "13.234.109.247:3000/";
    }
 
    login(username:string, password:string): Observable<boolean> {

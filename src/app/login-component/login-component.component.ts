@@ -26,7 +26,7 @@ export class LoginComponentComponent implements OnInit {
   private nameError = false;
   private passWordError = false;
   private dis = false;
-  private _url = 'http://localhost:3000/api/login';
+  private _url = 'http://13.234.109.247:3000/api/login';
 
   onSubmit(value: any) {
     //console.log(value.username);

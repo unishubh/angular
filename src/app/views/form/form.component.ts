@@ -14,10 +14,10 @@ import { company_type, industry_type, vendor_type } from './../../form_data/vend
 export class FormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: Http, private fb: FormBuilder, private router: Router) { }
-  private _url = 'http://localhost:3000/api/vendorDetails';
-  private _url_form = 'http://localhost:3000/api/form';
-  private submit_url = 'http://localhost:3000/api/submitVendor';
-  private _fields_url = "http://localhost:3000/api/declineFields";
+  private _url = 'http://13.234.109.247:3000/api/vendorDetails';
+  private _url_form = 'http://13.234.109.247:3000/api/form';
+  private submit_url = 'http://13.234.109.247:3000/api/submitVendor';
+  private _fields_url = "http://13.234.109.247:3000/api/declineFields";
   public identifier: String;
   public isForm1: Boolean;
   public isForm2: Boolean;

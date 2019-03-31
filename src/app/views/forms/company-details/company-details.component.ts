@@ -21,8 +21,8 @@ export class CompanyDetailsComponent implements OnInit {
   public identifier: string;
   public editable: number = 2;
   public fields: any[];
-  private url = "http://localhost:3000/api/save";
-  private _fields_url = "http://localhost:3000/api/declineFields";
+  private url = "http://13.234.109.247:3000/api/save";
+  private _fields_url = "http://13.234.109.247:3000/api/declineFields";
   public isData = false;
   public isForm2 = false;
   fd = new FormData();
@@ -105,7 +105,7 @@ export class CompanyDetailsComponent implements OnInit {
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       let content = new URLSearchParams();
       content.set('identifier', this.identifier);
-      this.http.post("http://localhost:3000/api/submitForm", content.toString(), { headers: headers })
+      this.http.post("http://13.234.109.247:3000/api/submitForm", content.toString(), { headers: headers })
       .subscribe (
         (response: Response) => {
           console.log(response.json());
@@ -210,7 +210,7 @@ export class CompanyDetailsComponent implements OnInit {
     //headers.append('Content-Type', 'application/x-www-form-urlencoded');
      // headers.append('Accept', 'application/json');
     console.log(this.fd);
-    this.http.post("http://localhost:3000/api/uploadeDeclaration", this.fd)
+    this.http.post("http://13.234.109.247:3000/api/uploadeDeclaration", this.fd)
     .subscribe(res => {
       console.log(res);
       alert("Files uploaded successfully");

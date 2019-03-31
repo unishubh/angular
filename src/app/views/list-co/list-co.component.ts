@@ -14,7 +14,7 @@ export class ListCoComponent implements OnInit {
   public level :string;
   public current_level : Number;
   public token = localStorage.getItem('token');
-  public url: string = "http://localhost:3000/api/list/";
+  public url: string = "http://13.234.109.247:3000/api/list/";
   public array :any[];
   public isEmail : boolean = false;
   public isName : boolean = false;

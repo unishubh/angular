@@ -15,7 +15,7 @@ export class BranchComponent implements OnInit {
   public isChanged: boolean = false;
   public show = true;
   public branches: Branches[]=[];
-  private url = "http://localhost:3000/api/save";
+  private url = "http://13.234.109.247:3000/api/save";
   public isChecked: any = { "value": false };
   public iseditable = 0;
   public identifier: string;
@@ -153,7 +153,7 @@ export class BranchComponent implements OnInit {
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       let content = new URLSearchParams();
       content.set('identifier', this.identifier);
-      this.http.post("http://localhost:3000/api/submitForm", content.toString(), { headers: headers })
+      this.http.post("http://13.234.109.247:3000/api/submitForm", content.toString(), { headers: headers })
         .subscribe(
           (response: Response) => {
             console.log(response.json());

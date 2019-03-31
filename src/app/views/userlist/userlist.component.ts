@@ -10,7 +10,7 @@ import { Http, Headers, Response } from '@angular/http';
 export class UserlistComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: Http) { }
-  public url: string = "http://localhost:3000/api/userList/";
+  public url: string = "http://13.234.109.247:3000/api/userList/";
   public users : any[];
   ngOnInit() {
     var headers = new Headers();

@@ -17,7 +17,7 @@ export class InhousevendorsComponent implements OnInit {
   public categories = categories;
   public product_types = product_types;
   public types = types;
-  private _url = "http://localhost:3000/api/addVendor";
+  private _url = "http://13.234.109.247:3000/api/addVendor";
   public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   public onlyNums = "^[0-9]*$";
   public onlyAlpha = "^[A-Za-z]+$";

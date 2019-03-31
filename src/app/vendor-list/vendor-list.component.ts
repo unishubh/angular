@@ -9,7 +9,7 @@ import { Http, Headers, Response } from '@angular/http';
 export class VendorListComponent implements OnInit {
 
   constructor(private http: Http) { }
-  private _url = "http://localhost:3000/api/showVendors";
+  private _url = "http://13.234.109.247:3000/api/showVendors";
   private level : number;
   public vendors :any[] = [];
 

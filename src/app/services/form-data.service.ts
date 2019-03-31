@@ -10,7 +10,7 @@ export class FormDataService {
   private isCompnayContactValid: boolean = false;
   private isCompnayDetailsValid: boolean = false;
   private isContactValid: boolean = false;
-  private _fields_url = "http://localhost:3000/api/vendorDetails";
+  private _fields_url = "http://13.234.109.247:3000/api/vendorDetails";
   public flag = 0;
   public flago = 0;
   public flagb = 0;

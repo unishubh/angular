@@ -15,8 +15,8 @@ export class ContactComponent implements OnInit {
   public editable: number = 2;
   public show = true;
   public fields: any[];
-  private url = "http://localhost:3000/api/save";
-  private _fields_url = "http://localhost:3000/api/declineFields";
+  private url = "http://13.234.109.247:3000/api/save";
+  private _fields_url = "http://13.234.109.247:3000/api/declineFields";
   constructor(private route: ActivatedRoute, private router: Router, private formDataService: FormDataService, private http: Http) { }
 
   ngOnInit() {
@@ -81,7 +81,7 @@ export class ContactComponent implements OnInit {
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       let content = new URLSearchParams();
       content.set('identifier', this.identifier);
-      this.http.post("http://localhost:3000/api/submitForm", content.toString(), { headers: headers })
+      this.http.post("http://13.234.109.247:3000/api/submitForm", content.toString(), { headers: headers })
       .subscribe (
         (response: Response) => {
           console.log(response.json());

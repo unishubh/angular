@@ -19,7 +19,7 @@ export class InitvendorComponent implements OnInit {
   public types = types;
   //public categories: any[] = categories;
   //public product_type :any[] = product_types;
-  private _url = "http://localhost:3000/api/addVendor";
+  private _url = "http://13.234.109.247:3000/api/addVendor";
   public emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   public onlyNums = "^[0-9]*$";
   public onlyAlpha = "^[A-Za-z]+$";

@@ -12,7 +12,7 @@ import {fields} from './../../form_data/declinedReasons';
 export class VendorDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: Http, private router: Router) { }
-  private _url = "http://localhost:3000/api/vendorDetails";
+  private _url = "http://13.234.109.247:3000/api/vendorDetails";
   public vendors: any[] = [];
   public sales: any[] = [];
   public promoters: any[] = [];
@@ -54,8 +54,8 @@ export class VendorDetailsComponent implements OnInit {
         console.log(params["id"]);
         this.id = params["id"];
         let url = this._url + "/" + params["id"];
-        let activity_url = "http://localhost:3000/api/lastAction";
-        let verificationUrl = "http://localhost:3000/api/verificationMessage"
+        let activity_url = "http://13.234.109.247:3000/api/lastAction";
+        let verificationUrl = "http://13.234.109.247:3000/api/verificationMessage"
         console.log(url);
         var headers = new Headers();
         headers.append('Authorization', `Bearer ${this.token}`);
@@ -131,7 +131,7 @@ export class VendorDetailsComponent implements OnInit {
     headers.append('Authorization', `Bearer ${this.token}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.http.post("http://localhost:3000/api/verifyVendor/", content.toString(), { headers: headers })
+    this.http.post("http://13.234.109.247:3000/api/verifyVendor/", content.toString(), { headers: headers })
       .subscribe(
         (response: Response) => {
           let resp = response.json();
@@ -225,7 +225,7 @@ export class VendorDetailsComponent implements OnInit {
     headers.append('Authorization', `Bearer ${this.token}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.http.post("http://localhost:3000/api/declineVendor/", content.toString(), { headers: headers })
+    this.http.post("http://13.234.109.247:3000/api/declineVendor/", content.toString(), { headers: headers })
       .subscribe(
         (response: Response) => {
           let resp = response.json();
@@ -249,7 +249,7 @@ export class VendorDetailsComponent implements OnInit {
     headers.append('Authorization', `Bearer ${this.token}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.http.post("http://localhost:3000/api/forceVerify/", content.toString(), { headers: headers })
+    this.http.post("http://13.234.109.247:3000/api/forceVerify/", content.toString(), { headers: headers })
       .subscribe(
         (response: Response) => {
           let resp = response.json();
@@ -279,7 +279,7 @@ export class VendorDetailsComponent implements OnInit {
     //headers.append('Content-Type', 'application/x-www-form-urlencoded');
      // headers.append('Accept', 'application/json');
     //console.log(fd);
-    this.http.post("http://localhost:3000/api/uploadeReport", this.fd)
+    this.http.post("http://13.234.109.247:3000/api/uploadeReport", this.fd)
     .subscribe(res => {
       console.log(res);
       this.reportSubmitted = true;
